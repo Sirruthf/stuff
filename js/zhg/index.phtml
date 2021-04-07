@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Жегалкин's polynome</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="left">
+            <table class="func-table">
+                <tbody>
+                    <tr>
+                        <th>w</th>
+                        <th>x</th>
+                        <th>y</th>
+                        <th>z</th>
+                        <th>f(w,x,y,z)</th>
+                    </tr>
+                    <?
+                        function four_digits($n)
+                        {
+                            return sprintf("%04d", decbin($n));
+                        }
+                        
+                        for ($i = 0; $i < 16; $i++)
+                        {
+                            echo "<tr class='func-table__row' data-values='".four_digits($i)."'>
+                                <td>".four_digits($i)[0]."</td>
+                                <td>".four_digits($i)[1]."</td>
+                                <td>".four_digits($i)[2]."</td>
+                                <td>".four_digits($i)[3]."</td>
+                                <td class='func-table__value dephasizeable'><div class='num-container'></div></td>
+                            </tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="right polynome-container">
+            <div class="polynome-format"></div>
+            <div class="polynome-options">
+                <?
+                    $pols = [];
+                    for ($i = 0; $i < 16; $i++)
+                    {
+                        $value = ((bool)(int)four_digits($i)[0] ? "w" : "").((bool)(int)four_digits($i)[1] ? "x" : "").((bool)(int)four_digits($i)[2] ? "y" : "").((bool)(int)four_digits($i)[3] ? "z" : "");
+                        $value = $value == "" ? "1" : $value;
+                        $f4 = file_get_contents("polynome.html", 'r');
+                        $f4 = str_replace('{member}', $value, $f4);
+                        $f4 = str_replace('{values}', four_digits($i), $f4);
+                        $pols[$value] = $f4;
+                    }
+                    uksort($pols, function ($a, $b) { return strlen($a) - strlen($b) ?: strcmp($a, $b); });
+                    foreach($pols as $pol) echo $pol;
+                ?>
+                <div class="polynomes-total">0</div>
+            </div>
+        </div>
+        <script type="module" src="script.js"></script>
+    </body>
+</html>

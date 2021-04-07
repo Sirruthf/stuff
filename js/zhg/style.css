@@ -1,0 +1,103 @@
+body {
+    margin: 40px;
+}
+
+.left, .right {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.right {
+    margin-left: 48px;
+    max-width: 40%;
+}
+
+.func-table {
+    font-size: 1.6em;
+    border-collapse: collapse;
+}
+
+.func-table th, .func-table td {
+    padding: 2px 8px;
+    text-align: center;
+}
+
+.func-table td:not(.func-table__value) {
+    color: lightgray;
+}
+
+.func-table__value {
+    color: #333;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.dephasized, .dephasized .dephasizeable {
+    color: lightgray;
+}
+
+.num-container {
+    margin-top: -28px;
+    transform-style: preserve-3d;
+    transform-origin: 50% 100%;
+    transition: all .2s ease;
+}
+
+.one .num-container {
+    transform: rotateX(90deg);
+}
+
+.num-container::before {
+    content: '1';
+    display: block;
+    transform-origin: 50% 100%;
+    transform: rotateX(-90deg);
+}
+
+.num-container::after {
+    content: '0';
+    display: block;
+}
+
+.polynome-format {
+    min-height: 80px;
+    font-size: 24px;
+}
+
+.polynome-option {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: top;
+    margin: 4px;
+}
+
+.polynome-option__check {
+    display: none;
+}
+
+.polynome {
+    box-sizing: border-box;
+    width: 100px;
+    height: 32px;
+    
+    padding: 6px;
+    text-align: center;
+    border: 1px solid lightgray;
+    transition: all .2s ease;
+}
+
+.polynome:hover {
+    border-color: gray;
+}
+
+.polynome-option__check:checked + .polynome {
+    background: lightgray;
+}
+
+.polynomes-total {
+    display: inline-block;
+    font-size: 24px;
+    line-height: 40px;
+    margin-left: 8px;
+}

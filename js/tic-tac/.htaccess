@@ -1,0 +1,119 @@
+<IfModule mod_headers.c>
+    Header append Cache-Control "no-store, no-cache, must-revalidate"
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On ExpiresDefault "now"
+</IfModule>
+
+
+RewriteEngine on
+RewriteBase /projects/tic-tac/
+
+RewriteRule style.css$ style.css [L]
+
+RewriteRule ^x/x/x/ results/xwon/ [R=302,L]
+RewriteRule ^([x0-]/){3}x/x/x/ results/xwon/ [R=302,L]
+RewriteRule x/x/x/$ results/xwon/ [R=302,L]
+RewriteRule ^(x/[x0-]/[x0-]/){3} results/xwon/ [R=302,L]
+RewriteRule ^([x0-]/x/[x0-]/){3} results/xwon/ [R=302,L]
+RewriteRule ^([x0-]/[x0-]/x/){3} results/xwon/ [R=302,L]
+RewriteRule ^x/([x0-]/){3}x/([x0-]/){3}x/ results/xwon/ [R=302,L]
+RewriteRule ^([x0-]/){2}x/[x0-]/x/[x0-]/x/([x0-]/){2} results/xwon/ [R=302,L]
+RewriteRule results/xwon/ x.html [L]
+
+RewriteRule ^0/0/0/ results/0won/ [R=302,L]
+RewriteRule ^([x0-]/){3}0/0/0/ results/0won/ [R=302,L]
+RewriteRule 0/0/0/$ results/0won/ [R=302,L]
+RewriteRule ^(0/[x0-]/[x0-]/){3} results/0won/ [R=302,L]
+RewriteRule ^([x0-]/0/[x0-]/){3} results/0won/ [R=302,L]
+RewriteRule ^([x0-]/[x0-]/0/){3} results/0won/ [R=302,L]
+RewriteRule ^0/([x0-]/){3}0/([x0-]/){3}0/ results/0won/ [R=302,L]
+RewriteRule ^([x0-]/){2}0/[x0-]/0/[x0-]/0/([x0-]/){2} results/0won/ [R=302,L]
+RewriteRule results/0won/ 0.html [L]
+
+RewriteRule ^([^-]/){9} results/-won/ [R=302,L]
+RewriteRule results/-won/ -.html [L]
+
+
+RewriteRule ^$ -/-/-/-/-/-/-/-/-/x/ [R=302,L]
+RewriteRule /[x0-]/$ index.html
+
+
+RewriteRule ^x/.+1\.png x.png [L]
+RewriteRule ^./x/.+2\.png x.png [L]
+RewriteRule ^././x/.+3\.png x.png [L]
+RewriteRule ^./././x/.+4\.png x.png [L]
+RewriteRule x/./././././5\.png x.png [L]
+RewriteRule x/././././6\.png x.png [L]
+RewriteRule x/./././7\.png x.png [L]
+RewriteRule x/././8\.png x.png [L]
+RewriteRule x/./9\.png x.png [L]
+
+RewriteRule ^0/.+1\.png 0.png [L]
+RewriteRule ^./0/.+2\.png 0.png [L]
+RewriteRule ^././0/.+3\.png 0.png [L]
+RewriteRule ^./././0/.+4\.png 0.png [L]
+RewriteRule 0/./././././5\.png 0.png [L]
+RewriteRule 0/././././6\.png 0.png [L]
+RewriteRule 0/./././7\.png 0.png [L]
+RewriteRule 0/././8\.png 0.png [L]
+RewriteRule 0/./9\.png 0.png [L]
+RewriteRule [^x0]\.png -.png
+
+
+RewriteCond %{REQUEST_URI} x/1/$
+RewriteRule ^-/((?:[x0-]/){8})x/1/$ x/$10/ [R=302]
+RewriteRule ^([^-]/(?:[x0-]/){8})x/1/$ $1x/ [R=302]
+RewriteCond %{REQUEST_URI} x/2/$
+RewriteRule ^([x0-]/)-/((?:[x0-]/){7})x/2/$ $1x/$20/ [R=302]
+RewriteRule ^([x0-]/[^-]/(?:[x0-]/){7})x/2/$ $1x/ [R=302]
+RewriteCond %{REQUEST_URI} x/3/$
+RewriteRule ^((?:[x0-]/){2})-/((?:[x0-]/){6})x/3/$ $1x/$20/ [R=302]
+RewriteRule ^((?:[x0-]/){2}[^-]/(?:[x0-]/){6})x/3/$ $1x/ [R=302]
+RewriteCond %{REQUEST_URI} x/4/$
+RewriteRule ^((?:[x0-]/){3})-/((?:[x0-]/){5})x/4/$ $1x/$20/ [R=302]
+RewriteRule ^((?:[x0-]/){3}[^-]/(?:[x0-]/){5})x/4/$ $1x/ [R=302]
+RewriteCond %{REQUEST_URI} x/5/$
+RewriteRule ^((?:[x0-]/){4})-/((?:[x0-]/){4})x/5/$ $1x/$20/ [R=302]
+RewriteRule ^((?:[x0-]/){4}[^-]/(?:[x0-]/){4})x/5/$ $1x/ [R=302]
+RewriteCond %{REQUEST_URI} x/6/$
+RewriteRule ^((?:[x0-]/){5})-/((?:[x0-]/){3})x/6/$ $1x/$20/ [R=302]
+RewriteRule ^((?:[x0-]/){5}[^-]/(?:[x0-]/){3})x/6/$ $1x/ [R=302]
+RewriteCond %{REQUEST_URI} x/7/$
+RewriteRule ^((?:[x0-]/){6})-/((?:[x0-]/){2})x/7/$ $1x/$20/ [R=302]
+RewriteRule ^((?:[x0-]/){6}[^-]/(?:[x0-]/){2})x/7/$ $1x/ [R=302]
+RewriteCond %{REQUEST_URI} x/8/$
+RewriteRule ^((?:[x0-]/){7})-/([x0-]/)x/8/$ $1x/$20/ [R=302]
+RewriteRule ^((?:[x0-]/){7}[^-]/[x0-]/)x/8/$ $1x/ [R=302]
+RewriteCond %{REQUEST_URI} x/9/$
+RewriteRule ^((?:[x0-]/){8})-/x/9/$ $1x/0/ [R=302]
+RewriteRule ^((?:[x0-]/){8}[^-])/x/9/$ $1x/ [R=302]
+
+RewriteCond %{REQUEST_URI} 0/1/$
+RewriteRule ^-/((?:[x0-]/){8})0/1/$ 0/$1x/ [R=302]
+RewriteRule ^([^-]/(?:[x0-]/){8})0/1/$ $10/ [R=302]
+RewriteCond %{REQUEST_URI} 0/2/$
+RewriteRule ^([x0-]/)-/((?:[x0-]/){7})0/2/$ $10/$2x/ [R=302]
+RewriteRule ^([x0-]/[^-]/(?:[x0-]/){7})0/2/$ $10/ [R=302]
+RewriteCond %{REQUEST_URI} 0/3/$
+RewriteRule ^((?:[x0-]/){2})-/((?:[x0-]/){6})0/3/$ $10/$2x/ [R=302]
+RewriteRule ^((?:[x0-]/){2}[^-]/(?:[x0-]/){6})0/3/$ $10/ [R=302]
+RewriteCond %{REQUEST_URI} 0/4/$
+RewriteRule ^((?:[x0-]/){3})-/((?:[x0-]/){5})0/4/$ $10/$2x/ [R=302]
+RewriteRule ^((?:[x0-]/){3}[^-]/(?:[x0-]/){5})0/4/$ $10/ [R=302]
+RewriteCond %{REQUEST_URI} 0/5/$
+RewriteRule ^((?:[x0-]/){4})-/((?:[x0-]/){4})0/5/$ $10/$2x/ [R=302]
+RewriteRule ^((?:[x0-]/){4}[^-]/(?:[x0-]/){4})0/5/$ $10/ [R=302]
+RewriteCond %{REQUEST_URI} 0/6/$
+RewriteRule ^((?:[x0-]/){5})-/((?:[x0-]/){3})0/6/$ $10/$2x/ [R=302]
+RewriteRule ^((?:[x0-]/){5}[^-]/(?:[x0-]/){3})0/6/$ $10/ [R=302]
+RewriteCond %{REQUEST_URI} 0/7/$
+RewriteRule ^((?:[x0-]/){6})-/((?:[x0-]/){2})0/7/$ $10/$2x/ [R=302]
+RewriteRule ^((?:[x0-]/){6}[^-]/(?:[x0-]/){2})0/7/$ $10/ [R=302]
+RewriteCond %{REQUEST_URI} 0/8/$
+RewriteRule ^((?:[x0-]/){7})-/([x0-]/)0/8/$ $10/$2x/ [R=302]
+RewriteRule ^((?:[x0-]/){7}[^-]/[x0-]/)0/8/$ $10/ [R=302]
+RewriteCond %{REQUEST_URI} 0/9/$
+RewriteRule ^((?:[x0-]/){8})-/0/9/$ $10/x/ [R=302]
+RewriteRule ^((?:[x0-]/){8}[^-])/0/9/$ $10/ [R=302]
