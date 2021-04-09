@@ -9,7 +9,10 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    filetree.cpp \
     fsparams.cpp \
+    ftiterator.cpp \
+    ftnode.cpp \
     headeritemstyleoption.cpp \
     headeritemwidget.cpp \
     headerstyleoption.cpp \
@@ -22,7 +25,10 @@ SOURCES += \
     rowwidget.cpp
 
 HEADERS += \
+    filetree.h \
     fsparams.h \
+    ftiterator.h \
+    ftnode.h \
     headeritemstyleoption.h \
     headeritemwidget.h \
     headerstyleoption.h \

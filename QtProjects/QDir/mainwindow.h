@@ -8,15 +8,15 @@
 #include "fsparams.h"
 #include "rowlistmanager.h"
 #include "headerwidget.h"
-//#include "filetree.h"
-//#include "ftiterator.h"
+#include "filetree.h"
+#include "ftiterator.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 
-typedef QMap<QString, bool> FileTree;
+//typedef QMap<QString, bool> FileTree;
 typedef QMap<QString, FileTree*> FileTreeList;
 
 class MainWindow: public QMainWindow

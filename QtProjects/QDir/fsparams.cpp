@@ -1,10 +1,8 @@
 #include "fsparams.h"
 
 
-FSParams::FSParams (QString path)
+FSParams::FSParams (QString path) : ini(path)
 {
-    this->ini = path;
-
     QFile iniFile(path);
 
     if (!iniFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -30,9 +28,9 @@ FSParams::FSParams (QString path)
         if (name == "PATHCOUNT")
             PATHCOUNT = value.toInt();
         else if (name == "BASE_PATH")
-            BASE_PATH = value;
+            BASE_PATH = value.toLower();
         else if (name == "PATHS")
-            PATHS = value.split(", ");
+            PATHS = value.toLower().split(", ");
         else
         {
             QVector<int> rgb = QVector<int>();

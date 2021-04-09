@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->scrollAreaWidgetContents->layout()->setSpacing(0);
     ui->stackedWidget->layout()->setSpacing(0);
 
-    params = new FSParams (this->defaultIni);
+    this->params = new FSParams (this->defaultIni);
+    this->files = nullptr;
 
     titleRow = new HeaderWidget(params->PATHS, this);
     ui->verticalLayout_2->insertWidget(0, titleRow);
@@ -35,55 +36,46 @@ MainWindow::~MainWindow()
     delete ui;
     delete manager;
     delete params;
-    delete files;
-}
 
-void MainWindow::start()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-    this->files = this->getFileLists(params);
-    this->printRows(files, params);
-    this->resizeHeader();
+    if (files != nullptr) // closed before the start
+        delete files;
 }
 
 void MainWindow::printRows (FileTreeList* fileColumns, FSParams* option)
 {
     for (int i = 0; i < option->PATHCOUNT; i++)
     {
-        QString folder = option->PATHS[i];
-        FileTree* column = fileColumns->value(folder);
-        FileTree::iterator it = column->begin();
+        FileTree* column = fileColumns->value(option->PATHS[i]);
+        if (column->size <= 1) continue;
 
-        while (it != column->end())
+        FileTree::iterator end = column->end();
+
+        for (auto& it : *column)
         {
             RowWidget* row = new RowWidget(option->PATHCOUNT);
+            if (it.node()->neglect) continue;
 
-            QString text = it.key();
-            if (it.value()) continue;
-
-            text.replace(option->BASE_PATH + folder + "/", "");
-            row->setLabel(i, text);
+            row->setLabel(i, it.name());
 
             for (int u = i + 1; u < option->PATHCOUNT; u++)
             {
-                FileTree* _column = fileColumns->value(option->PATHS[u]);
-                FileTree::iterator ahead = _column->find(text);
+                FileTree* column = fileColumns->value(option->PATHS[u]);
+                if (column->size <= 1) continue;
 
-                if (ahead != _column->end())
-                {
-                    ahead.value() = true;
-                    row->setLabel(u, text);
+                try {
+                    FTNode* ahead = column->get(it.path());
+                    ahead->neglect = true;
+                    row->setLabel(u, it.name());
+
+                } catch (FileTree::NotFoundException) {
+//                    qDebug() << "Not found: " << it.name();
                 }
             }
 
             content->addWidget(row);
             manager->push(row);
-
-            it++;
         }
     }
-
-    qDebug() << "good here";
 }
 
 FileTreeList* MainWindow::getFileLists (FSParams* option)
@@ -93,17 +85,26 @@ FileTreeList* MainWindow::getFileLists (FSParams* option)
     for (int i = 0; i < option->PATHCOUNT; i++)
     {
         QDirIterator qdi(option->BASE_PATH + option->PATHS[i], QDir::Files, QDirIterator::Subdirectories);
+
         FileTree* _ft = new FileTree;
         result->insert(option->PATHS[i], _ft);
 
         while (qdi.hasNext())
         {
             QString file(qdi.next());
-            _ft->insert(file, false);
+            _ft->insert(file.toLower().replace(option->BASE_PATH + option->PATHS[i] + "/", ""));
         }
     }
 
     return result;
+}
+
+void MainWindow::start()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+    this->files = this->getFileLists(params);
+    this->printRows(files, params);
+    this->resizeHeader();
 }
 
 void MainWindow::headerOrderChanged()
@@ -133,8 +134,6 @@ void MainWindow::resizeEvent (QResizeEvent*)
 
 void MainWindow::resizeHeader()
 {
-    qDebug() << ui->scrollAreaWidgetContents->height() << ui->scrollAreaWidgetContents->children().size();
-
     this->titleRow->updateCellGeometry(ui->scrollArea->horizontalScrollBar()->isVisible(),
                                        ui->scrollArea->verticalScrollBar()->isVisible());
 }

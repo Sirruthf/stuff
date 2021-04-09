@@ -3,10 +3,11 @@
 #include "qdstyle.h"
 
 
-HeaderItemWidget::HeaderItemWidget(QString str, int i, int id, QWidget* parent) : QLabel(str, parent)
+HeaderItemWidget::HeaderItemWidget(QString str, int i, int id, QWidget* parent) :
+    QLabel(str, parent),
+    index(i),
+    id(id)
 {
-    this->index = i;
-    this->id = id;
     this->setStyle(new QDStyle);
     this->setAttribute(Qt::WA_Hover, true);
     this->setContentsMargins(12, 8, 12, 8);
