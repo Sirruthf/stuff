@@ -1,0 +1,24 @@
+RewriteEngine on
+
+RewriteBase /projects/shirt
+ErrorDocument 404 /projects/shirt/templates/404.phtml
+
+# Dot indicates a file request
+RewriteCond %{REQUEST_URI} !\.[^/]+$
+RewriteRule ^(.*[^/])$ $1/ [R,L]
+
+RewriteRule ^catalogue/$ catalogue/all/ [R,L]
+RewriteRule ^catalogue/all/(.+)/$ catalogue/$1/ [R,L]
+RewriteRule ^catalogue/(.+)/$ catalogue.php?$1 [L]
+RewriteRule ^product/(.+)/$ product.php?$1 [L]
+RewriteRule ^constructor/(.*)$ constructor.php?$1 [L]
+RewriteRule ^shipment/(.*)$ shipment.phtml?$1 [L]
+RewriteRule ^cart/(.*)$ cart.php?$1 [L]
+
+RewriteRule ^commit/$ sql/place_tmp_order.php [L]
+RewriteRule ^stage_picture/$ sql/stage_order_image.php [L]
+
+RewriteRule ^(.+\.scss)$ lib/scss_compile.php?source=$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule img/.+$ img/product/default.png [R,L]

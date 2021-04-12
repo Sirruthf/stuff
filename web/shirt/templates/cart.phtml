@@ -1,0 +1,65 @@
+<?
+    rkAssert(["card_list", "total_price", "short_list", "not_empty", "lc_names", "cart_source"], $_param_);
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/projects/shirt/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/css/cart.css">
+        <title>Главное в Жизни — Каталог</title>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:700&display=swap" rel="stylesheet">
+        <script src="/projects/shirt/js/cms-auth.js"></script>
+        <style class="js-style"></style>
+    </head>
+    <body>
+        <? requireTemplate('header'); ?>
+        <div class="black-overlay"></div>
+        <div class="final-form">
+            <div class="button close-button">🗴</div>
+            <div>
+                <h1 class="final-form__title">Оформить заказ</h1>
+                <div class="final-form__desc">Мы перезвоним в течение двух часов</div>
+                <input class="input final-form__input final-name-input" placeholder="Имя" data-placeholder="Имя" autofill="name">
+                <input class="input final-form__input final-phone-input" placeholder="Телефон" data-placeholder="Телефон" autofill="tel">
+                <input class="input final-form__input final-email-input" placeholder="E-mail" data-placeholder="E-mail" autofill="email">
+            </div>
+            <input type="submit" class="button final-button" value="Да">
+        </div>
+        <main class="root main">
+            <nav class="root breadcrumbs">
+                ← <a class="link" href="/projects/shirt/">Главная</a>
+                ← <a class="link" href="/projects/shirt/catalogue/all/">Каталог</a>
+            </nav>
+            <h1 class="main__title">Корзина</h1>
+            <div class="main__content">
+                <ul class="card-list"><? printCards($_param_["card_list"]); ?></ul>
+                <div class="right-block">
+                    <div class="summary-block">
+                        <div>
+                            <div class="right-block__head-row">
+                                <div class="right-block__price-desc">Итого</div>
+                                <div class="right-block__price"><?=$_param_["total_price"]?> ₽</div>
+                            </div>
+                            <ul class="right-block__short-list"><?=$_param_["short_list"]?></ul>
+                        </div>
+                        <input type="submit" class="button final-button open-overlay-button <?=($_param_["not_empty"] ? "" : "button_disabled")?>" value="Оформить" <?=($_param_["not_empty"] ? "" : "disabled")?>>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" class="types-input" value='<?=$_param_["lc_names"]?>'>
+            <input type="hidden" class="cart-contents" value='<?=$_param_["cart_source"]["data"]?>'>
+        </main>
+        <? requireTemplate('footer'); ?>
+        
+        <script type="module">
+            import Q from '/projects/for_short.js';
+            import Cart from '/projects/shirt/js/Cart.js';
+            import CartPageManager from '/projects/shirt/js/CartPageManager.js';
+            
+            
+            let cardList = new CartPageManager(new Cart(Q(".cart-contents").value));
+        </script>
+    </body>
+</html>

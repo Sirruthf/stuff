@@ -1,0 +1,18 @@
+<?
+    rkAssert(["date", "name", "phone", "email", "uid"], $_param_);
+?>
+
+<div class="order-block">
+    <div class="row title-row">
+        <div class="cell dropdown-cell">
+            <? printDropdown(); ?>
+        </div>
+        <div class="cell date-cell"><?=$_param_["date"]?></div>
+        <div class="cell name-cell"><?=$_param_["name"]?></div>
+        <div class="cell phone-cell"><?=$_param_["phone"]?></div>
+        <div class="cell email-cell"><?=$_param_["email"]?></div>
+    </div>
+    <div class="rows-list">
+        <? printRows($_param_["uid"]); ?>
+    </div>
+</div>

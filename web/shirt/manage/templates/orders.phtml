@@ -1,0 +1,25 @@
+v<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/projects/shirt/manage/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/orders.css">
+        <title>Главное в жизни — Заказы</title>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:700&display=swap" rel="stylesheet">
+        <script src="/projects/for_short.js"></script>
+        <script src="/projects/shirt/manage/js/ui_shared.js"></script>
+    </head>
+    <body>
+        <? include 'templates/header.phtml'; ?>
+        <main class="main">
+            <? printOrders(); ?>
+        </main>
+        <script>
+            
+            let dropdownMenu = new DropdownMenu({
+                select: Q(".status-select"),
+                dropdown: Q(".status-dropdown")
+            });
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+<?
+    rkAssert(["id", "loc_name", "url_prep", "url", "rename-icon", "copy-icon", "del-icon"], $_param_);
+?>
+
+<div class="row sub-row">
+    <input name="id" class="input id-input" value="<?=$_param_["id"]?>" hidden>
+    <input name="loc_name" class="input inline-input cat-name-input sendable" value="<?=$_param_["loc_name"]?>" disabled>
+    <label class="cat-url-wrap">
+        <div class="cat-url-prep"><?=$_param_["url_prep"]?>/</div>
+        <input name="url" class="input inline-input cat-url-input sendable" value="<?=$_param_["url"]?>" disabled>
+    </label>
+    <span class="row__button rename-button"><?require $_param_["rename-icon"]?></span>
+    <span class="row__button copy-button"><?require $_param_["copy-icon"]?></span>
+    <span class="row__button del-button"><?require $_param_["del-icon"]?></span>
+</div>

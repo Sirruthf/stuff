@@ -1,0 +1,96 @@
+<?
+    $_arglist = ["cart_count"];
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/generic.css">
+        <link rel="stylesheet" href="css/main.css">
+        <title>Главное в Жизни</title>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:700|Roboto+Condensed:700&display=swap" rel="stylesheet">
+        <script src="js/cms-auth.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <div class="root header__item">
+                <nav class="header__left">
+                    <a class="link nav-link" href="./">Главная</a>
+                    <a class="link nav-link" href="catalogue/">Каталог</a>
+                    <a class="link nav-link" href="constructor/">Конструктор</a>
+                    <a class="link nav-link" href="shipment/">Доставка</a>
+                    <a class="link nav-link" href="catalogue">Оплата</a>
+                    <a class="link nav-link" href="catalogue">Контакты</a>
+                    <a class="link nav-link" href="catalogue">FAQ</a>
+                </nav>
+                <div class="header__right">
+                    <a class="sm-link"><? require 'img/generic/logo-vk.svg' ?></a>
+                    <a class="sm-link"><? require 'img/generic/logo-instagram.svg' ?></a>
+                    <a class="sm-link"><? require 'img/generic/logo-facebook.svg' ?></a>
+                </div>
+            </div>
+        </header>
+        <main class="root main">
+            <section class="contacts_block">
+                <div class="contacts_block__group">
+                    <div class="contacts_block__item contacts_block__creds"><img class="contacts_block__creds__logo" src="img/generic/logo.png"><h2 class="contacts_block__creds__header">Отличный<br>принт</h2></div>
+                    <div class="contacts_block__item contacts_block__address"><? require 'img/generic/conts-where.svg'; ?><div>м. Новокузнецкая,<br>ул. Новокузнецкая, д.1, офис 19</div></div>
+                    <div class="contacts_block__item contacts_block__time"><? require 'img/generic/conts-time.svg'; ?><div>10:00 - 20:00<br>каждый день</div></div>
+                    <div class="contacts_block__item contacts_block__comms"><div><span class="contacts_block__comms__phone">+7 (495) 646-05-75</span><br><a class="link contacts_block__comms__mail" href="mailto:info@print.ru">info@print.ru</a></div></div>
+                </div>
+                <a href="cart/" class="contacts_block__item contacts_block__basket"><div class="contacts_block__basket__button"><? require 'img/generic/conts-basket.svg'; ?></div><div class="contacts_block__basket__counter"><?=$_param_["cart_count"]?></div></a>
+            </section>
+            <section class="intro_block">
+                <h1 class="intro_block__header">Отличные принты<br>на футболках</h1>
+                <div class="intro_block__desc">
+                    Можно заказать всего одну<br>или на всю корпорацию.<br>
+                    Примеряйте свой дизайн<br>или выбирайте наш
+                </div>
+                <div class="intro_block__notes">
+                    <div class="intro_block__note"><h2 class="intro_block__note__header">-50%</h2><div class="desc-wrapper"><span class="intro_block__note__desc">за фото<br>в нашей майке</span></div></div>
+                    <div class="intro_block__note"><h2 class="intro_block__note__header">-25%</h2><div class="desc-wrapper"><span class="intro_block__note__desc">каждый<br>четверг</span></div></div>
+                    <div class="intro_block__note"><h2 class="intro_block__note__header">-20%</h2><div class="desc-wrapper"><span class="intro_block__note__desc">в Лень<br>рождения</span></div></div>
+                </div>
+            </section>
+            <section class="hot-cats_block" data-meow="True">
+                <a class="link hot-cats_block__item hot-cats__cat-male" href="catalogue/male/"><? require 'img/main/cats-male.svg'; ?>Для&nbsp;мужчин</a>
+                <a class="link hot-cats_block__item hot-cats__cat-female" href="catalogue/female/"><? require 'img/main/cats-female.svg'; ?>Для&nbsp;женщин</a>
+                <a class="link hot-cats_block__item hot-cats__cat-hangout" href="catalogue/hangout/"><? require 'img/main/cats-hangout.svg'; ?>На&nbsp;корпоратив</a>
+                <a class="link hot-cats_block__item hot-cats__cat-funny" href="catalogue/funny/"><? require 'img/main/cats-funny.svg'; ?>Смешные</a>
+            </section>
+            <section class="shirt-block">
+                <div class="shirt">
+                    <h2 class="title shirt__title"><span class="title__text">Самые клевые<br>надписи</span></h2>
+                    <img class="shirt__img_cat" src="img/main/cat_thumbnail-cool.png">
+                </div>
+                
+                <? fetchShowcase($connection); ?>
+            </section>
+            <section class="main__banners">
+                <div class="block construct-block">
+                    <h2 class="title construct-block__title"><span class="title__text construct-block__title__text">Oнлайн<br>конструктор</span></h2>
+                    <div class="construct-block__desc">Примерьте свою картинку<br>или фото прямо на майке</div>
+                    <a class="link button construct-block__button" href="constructor/">Примерить</a>
+                </div>
+                <div class="block corporate-block">
+                    <img class="corporate-block__img" src="img/main/corporate.png">
+                    <h3 class="corporate-block__title">-10% на корпоративные<br>заказы от 10 штук</h3>
+                    <div class="corporate-block__desc">Брендируем футболки, поло, толстовки<br>и другую одежду по лояльным ценам<br>и в адекватные сроки</div>
+                    <a class="link button corporate-block__button" href="catalogue/all/">Выбрать</a>
+                </div>
+            </section>
+            <section class="main__instateaser">
+                <h2 class="instateaser__title">Мы в Инстаграмм</h2>
+                <div class="photos">
+                    <img class="instateaser__photo" src="img/instagram01.png">
+                    <img class="instateaser__photo" src="img/instagram02.png">
+                    <img class="instateaser__photo" src="img/instagram03.png">
+                    <img class="instateaser__photo" src="img/instagram04.png">
+                    <img class="instateaser__photo" src="img/instagram05.png">
+                    <img class="instateaser__photo" src="img/instagram06.png">
+                </div>
+            </section>
+        </main>
+        <? requireTemplate("footer"); ?>
+    </body>
+</html>

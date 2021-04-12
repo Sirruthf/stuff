@@ -1,0 +1,105 @@
+:root {
+    --fade-time: .24s;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: inherit;
+}
+
+.saved-plate {
+    position: fixed;
+    display: block;
+    width: 100%;
+    top: 20px;
+    z-index: 2;
+    transition: all var(--fade-time) ease;
+    padding: 4px 0;
+    
+    text-align: center;
+    color: #FCFFFC;
+    background: #72EC38;
+}
+
+.saved-screening {
+    position: fixed;
+    display: block;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    
+    opacity: 0;
+    background: #33333388;
+    
+    transition: opacity var(--fade-time) ease;
+    pointer-events: none;
+}
+
+.saved-plate_fade {
+    top: 49px;
+}
+
+.saved-screening_fade {
+    opacity: 1;
+}
+
+.main {
+    margin-top: 72px;
+	padding-bottom: 40px;
+}
+
+.breadcrumbs {
+    margin-top: 72px;
+    font-size: 14px;
+}
+
+.color-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 32px);
+    column-gap: 12px;
+    
+    margin: 11px 14px 0 0;
+}
+
+.color-list__button {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    background: gray;
+    border-radius: 2px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.color-list__button_bordered {
+    border: 1px solid #CCCACA;
+}
+        
+.color-list__button__path {
+    transition: all .4s ease;
+}
+
+.color-list__button__path_light {
+    stroke: #FFFCFC;
+}
+    
+.color-list__select:checked + .color-list__button .color-list__button__path {
+    stroke-dasharray: 100% 0%;
+}
+
+.row__button {
+    display: inline-block;
+    height: 24px;
+    border-radius: 50%;
+    margin: 8px;
+    
+    opacity: 0;
+    transition: all .12s ease;
+}
+
+.row:hover .row__button, .row_active .row__button {
+    opacity: 1;
+}

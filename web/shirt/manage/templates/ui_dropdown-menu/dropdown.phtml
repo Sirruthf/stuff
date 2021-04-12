@@ -1,0 +1,23 @@
+<?
+    rkAssert(["select_class", "default", "dropdown_class"], $_param_);
+?>
+
+
+<div class="tmpl$select <?=$_param_["select_class"]?>" data-dropped="2" data-selected="">
+    <span class="tmpl$select__text <?=$_param_["select_class"]?>__text"><?=$_param_["default"]?></span>
+    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0L10 0L5 5L0 0Z" fill="black">
+            <animate begin="" class="to1" attributeName="d" to="M5 0L10 5L0 5L5 0Z" dur=".2s" fill="freeze"></animate>
+            <animate begin="" class="to2" attributeName="d" to="M10 0L5 5L0 0L10 0Z" dur=".2s" fill="freeze"></animate>
+            <animate begin="" class="to3" attributeName="d" to="M10 5L0 5L5 0L10 5Z" dur=".2s" fill="freeze"></animate>
+            <animate begin="" class="to4" attributeName="d" to="M5 5L0 0L10 0L5 5Z" dur=".2s" fill="freeze"></animate>
+            <animate begin="" class="to5" attributeName="d" to="M0 5L5 0L10 5L0 5Z" dur=".2s" fill="freeze"></animate>
+            <animate begin="" class="to6" attributeName="d" to="M0 0L10 0L5 5L0 0Z" dur=".2s" fill="freeze"></animate>
+        </path>
+    </svg>
+</div>
+<div class="tmpl$dropdown tmpl$thumbed <?=$_param_["dropdown_class"]?>">
+    <ul class="tmpl$dropdown__list">
+        <? printDDRows(); ?>
+    </ul>
+</div>

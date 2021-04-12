@@ -1,0 +1,7 @@
+<? rkAssert(["color_id", "too_bright", "id", "color", "quantity"], $_param_); ?>
+
+<div class="cell color-cell" data-key="<?=$_param_["color_id"]?>">
+    <input class="id-input" value="<?=$_param_["id"]?>" hidden>
+    <div class="color-stump<?=$_param_["too_bright"] ? " color-stump_too-bright" : "" ?>" style="background: <?=$_param_["color"]?>"></div>
+    <input class="quantity-input" style="color: <?=$_param_["color"]?>;" type="number" min="0" value="<?=$_param_["quantity"]?>">
+</div>

@@ -1,0 +1,52 @@
+<?
+    rkAssert(["tid", "cat_id", "preview", "shirt_name", "shirt_price", "shirt_discount", "shirt_comment"], $_param_);
+?>
+
+<div class="shirt">
+    <input class="id-input" value="<?=$_param_["tid"]?>" type="hidden">
+    <input class="cat-id-input sendable" value="<?=$_param_["cat_id"]?>" type="hidden">
+    <input class="preview-input sendable" name="preview" value="<?=$_param_["preview"]?>" type="hidden">
+    <label class="tmpl$check-box shirt__check">
+        <input class="tmpl$check-box__true-box shirt-checkbox" type="checkbox" hidden>
+        <div class="tmpl$check-box__imprint"></div>
+    </label>
+    <img class="shirt-main-pic" src="/projects/shirt/img/product/<?=$_param_["tid"]?>/<?=$_param_["preview"]?>">
+    <div class="shirt-row__right-block">
+        <div class="input-list">
+            <div class="input-cont name-input-cont">
+                <div class="input-cont__desc">Название</div>
+                <input class="input sendable shirt-input shirt-name-input" value="<?=$_param_["shirt_name"]?>" name="name">
+            </div>
+            <div class="input-cont price-input-cont">
+                <div class="input-cont__desc">Цена</div>
+                <input class="input sendable shirt-input shirt-price-input" value="<?=$_param_["shirt_price"]?>" name="price">
+            </div>
+            <div class="input-cont discount-input-cont">
+                <div class="input-cont__desc">Скидка %</div>
+                <input class="input sendable shirt-input shirt-discount-input" value="<?=$_param_["shirt_discount"]?>" name="discount">
+            </div>
+            <div class="input-cont comm-input-cont">
+                <div class="input-cont__desc">Комментарий</div>
+                <input class="input sendable shirt-input shirt-comm-input" value="<?=$_param_["shirt_comment"]?>" name="comment">
+            </div>
+        </div>
+        <div class="foto-block">
+            <div class="foto-block__desc">Фото</div>
+            <div class="foto-block__content">
+                <div class="foto-list tmpl$thumbed">
+                    <? printFotos($_param_["tid"]) ?>
+                </div>
+                <label class="button site-button add-image-button"><input class="image-input" type="file" accept=".png" multiple hidden>+<br>Фото</label>
+            </div>
+        </div>
+    </div>
+    <div class="drop-overlay">
+        <div class="drop-overlay__sub">
+            <svg class="drop-overlay__icon" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M26 13L23.7088 10.7088L14.625 19.7763V0H11.375V19.7763L2.3075 10.6925L0 13L13 26L26 13Z" fill="#FFFCFC"/>
+            </svg>
+            Кидать сюда
+        </div>
+        <div class="drop-overlay__droppable"></div>
+    </div>
+</div>

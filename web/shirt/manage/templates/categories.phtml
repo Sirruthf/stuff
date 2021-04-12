@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/projects/shirt/manage/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/categories.css">
+        <title>Главное в Жизни — Управление категориями</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans:400,700|PT+Serif:400,700&display=swap" rel="stylesheet">
+        <script src="/projects/shirt/manage/js/save.js"></script>
+    </head>
+    <body>
+        <? require 'templates/header.phtml' ?>
+        <nav class="root breadcrumbs">
+            ← <a class="link" href="/projects/shirt/manage/">Главная</a>
+        </nav>
+        <main class="root main">
+            <div class="block cat-block">
+                <div class="cat-block__page cat-group-root" data-assoc="0" data-url="">
+                    <? printParent($connection) ?>
+                </div>
+                <div class="add-row add-cat-row">
+                    Добавить раздел
+                    <div class="add-row__block">
+                        <input class="input add-cat-name-input">
+                        <input class="input add-cat-url-input">
+                        <input class="input button add-button add-button_disabled add-cat-button" type="button" value="+" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="block sub-cat-block">
+                <? printPage($connection) ?>
+                <div class="add-row add-sub-cat-row">
+                    <input class="url-prep-input" value="" hidden>
+                    Добавить подраздел
+                    <div class="add-row__block">
+                        <input class="input add-cat-name-input">
+                        <input class="input add-cat-url-input">
+                        <input class="input button add-button add-button_disabled add-sub-cat-button" type="button" value="+" disabled>
+                    </div>
+                </div>
+            </div>
+            
+            <template class="page-template">
+                <?=
+                    requireTemplate("categories/page", [
+                            'cat_name' => "", 'assoc' => 0, 'url' => "", 'selected' => false
+                        ],
+                        "manage/templates/"
+                    );
+                ?>
+            </template>
+            <template class="template-title-row">
+                <?=
+                    requireTemplate("categories/title-row", [
+                            'id' => 0, 'loc_name' => "", 'url' => "", 'rename-icon' => "img/cat__rename-button.svg", 'copy-icon' => "img/cat__copy-button.svg", 'del-icon' => "img/cat__del-button.svg",
+                            'assoc' => 0, 'selected' => false    
+                        ],
+                        "manage/templates/"
+                    );
+                ?>
+            </template>
+            <template class="template-row">
+                <?=
+                    requireTemplate("categories/row", [
+                            'id' => 0, 'loc_name' => "", 'url' => "", 'rename-icon' => "img/cat__rename-button.svg", 'copy-icon' => "img/cat__copy-button.svg", 'del-icon' => "img/cat__del-button.svg",
+                            'url_prep' => ""
+                        ],
+                        "manage/templates/"
+                    );
+                ?>
+            </template>
+        </main>
+        <script type="module" src="/projects/shirt/manage/js/categories.js"></script>
+        <script type="module">
+            import Q from '/projects/for_short.js';
+            import State from '/projects/shirt/manage/js/State.js';
+            import {Row, TitleRow, Page, RowManager, addCat, addSubCat} from '/projects/shirt/manage/js/categories.js';
+            
+            let globalState = new State();
+            let rowManager = new RowManager();
+            
+            
+            /////////////////////////////// buttons /////////////////////////////////////
+            
+            setupSaveButton(Q(".save-button"), "/projects/shirt/manage/sql/save-categories.php", () => globalState.serialize(), () => globalState.reset());
+            setupResetButton(Q(".reset-button"), Q(".saved-screening"), "/projects/shirt/manage/categories_content.php", async response => {
+                let result = null;
+                try {
+                    result = await response.clone().json();
+                } catch (err) {
+                    console.log(await response.text());
+                    throw err;
+                }
+                
+                let tmp = rowManager.getSelectedAssoc();
+                
+                globalState.reset();
+                rowManager.reset();
+                
+                result.data.forEach(page => {
+                    addCat(Q(".template-title-row"), rowManager, {
+                        name: page.loc_name,
+                        url: page.url,
+                        target: Q(".cat-block__page"),
+                        pageTarget: Q(".add-sub-cat-row"),
+                        state: globalState,
+                        assoc: page.assoc
+                    });
+                    
+                    page.rows.forEach(row => {
+                        addSubCat(Q(".template-row"), rowManager, {
+                            name: row.loc_name,
+                            urlPrep: page.url,
+                            url: row.url,
+                            target: Q(".sub-cat-block__page_visible"),
+                            parentAssoc: page.assoc,
+                            state: globalState,
+                            assoc: guidGenerator()
+                        });
+                    })
+                })
+                
+                rowManager.select(tmp);
+            });
+            
+            
+            //////////////////////////////////// setup //////////////////////////////////////
+            
+            Q(".title-row", true).forEach(row => {
+                let pageElem = Q(".sub-cat-block__page[data-assoc='" + row.to(".id-input").value + "']");
+                let subRows = pageElem.to(".row", true).map(sub_row => new Row(sub_row, globalState));
+                
+                let assoc = row.to(".id-input").value, url = row.to(".cat-url-input").value;
+                
+                rowManager.push(
+                    new TitleRow(row, globalState), 
+                    new Page(pageElem, subRows, {
+                        assoc: assoc, url: url
+                    })
+                );
+                
+            });
+            
+            
+            //////////////////////////////////// add ////////////////////////////////////////
+               
+            Q(".add-cat-name-input", true).forEach(cat => cat.on("input", () => {
+                cat.near(".add-button").disabled = !(cat.value && cat.near(".add-cat-url-input").value);
+            }));
+            
+            Q(".add-cat-url-input", true).forEach(cat => cat.on("input", () => {
+                cat.near(".add-button").disabled = !(cat.value && cat.near(".add-cat-name-input").value);
+            }));
+            
+            Q(".add-cat-row").to(".add-cat-name-input, .add-cat-url-input", true).on("keyup", function (event) {
+                if (event.key != "Enter") return false;
+                
+                let addRow = this.from(".add-row");
+                
+                addCat(Q(".template-title-row"), rowManager, {
+                    name: addRow.to(".add-cat-name-input").value,
+                    url: addRow.to(".add-cat-url-input").value,
+                    target: Q(".cat-block__page"),
+                    pageTarget: Q(".add-sub-cat-row"),
+                    state: globalState,
+                    assoc: guidGenerator()
+                });
+                
+                this.near(".add-cat-name-input", true).value = "";
+                this.near(".add-cat-url-input", true).value = "";
+                
+                this.near(".add-button").disabled = true;
+            });
+            
+            Q(".add-sub-cat-row").to(".add-cat-name-input, .add-cat-url-input", true).on("keyup", function (event) {
+                if (event.key != "Enter") return false;
+                
+                let addRow = this.from(".add-row");
+                
+                addSubCat(Q(".template-row"), rowManager, {
+                    name: addRow.to(".add-cat-name-input").value,
+                    urlPrep: Q(".sub-cat-block__page_visible").dataset.url,
+                    url: addRow.to(".add-cat-url-input").value,
+                    target: Q(".sub-cat-block__page_visible"),
+                    parentAssoc: Q(".sub-cat-block__page_visible").dataset.assoc,
+                    state: globalState,
+                    assoc: guidGenerator()
+                });
+                
+                this.near(".add-cat-name-input", true).value = "";
+                this.near(".add-cat-url-input", true).value = "";
+                
+                this.near(".add-button").disabled = true;
+            });
+            
+            Q(".add-cat-button").on("click", function () {
+                let addRow = this.from(".add-row");
+                
+                addCat(Q(".template-title-row"), rowManager, {
+                    name: addRow.to(".add-cat-name-input").value,
+                    url: addRow.to(".add-cat-url-input").value,
+                    target: Q(".cat-block__page"),
+                    pageTarget: Q(".add-sub-cat-row"),
+                    state: globalState,
+                    assoc: guidGenerator()
+                });
+                
+                this.near(".add-cat-name-input").value = "";
+                this.near(".add-cat-url-input").value = "";
+                this.disabled = true;
+            });
+            
+            Q(".add-sub-cat-button").on("click", function () {
+                let addRow = this.from(".add-row");
+                
+                addSubCat(Q(".template-row"), rowManager, {
+                    name: addRow.to(".add-cat-name-input").value,
+                    urlPrep: Q(".sub-cat-block__page_visible").dataset.url,
+                    url: addRow.to(".add-cat-url-input").value,
+                    target: Q(".sub-cat-block__page_visible"),
+                    parentAssoc: Q(".sub-cat-block__page_visible").dataset.assoc,
+                    state: globalState,
+                    assoc: guidGenerator()
+                });
+                
+                this.near(".add-cat-name-input").value = "";
+                this.near(".add-cat-url-input").value = "";
+                this.disabled = true;
+            });
+        </script>
+    </body>
+</html>

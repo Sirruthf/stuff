@@ -1,0 +1,230 @@
+:root {
+    --generic-light-gray: #E8EAEB;
+    --generic-gray: #C4C4C4;
+    --generic-dark-gray: #888888;
+    --button: #353535;
+    --button-action: #1C2932;
+    --accent-action: #0085E5;
+    --accent: #E728A2;
+    --white: #FFFCFC;
+    --black: #333333;
+    
+    --halfway-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    --full-shadow: 0px 3px 3px rgba(0, 0, 0, 0.36);
+}
+
+.tmpl\$check-box__imprint {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--generic-gray);
+    vertical-align: bottom;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.tmpl\$check-box__true-box:checked + .tmpl\$check-box__imprint {
+    background: var(--black);
+}
+
+.tmpl\$check-box__true-box:indeterminate + .tmpl\$check-box__imprint {
+    background: var(--generic-gray);
+}
+
+.tmpl\$thumbed::-webkit-scrollbar {
+	width: 8px;
+}
+
+.tmpl\$thumbed::-webkit-scrollbar-thumb {
+	background: var(--generic-gray);
+}
+
+.tmpl\$select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    
+    width: 175px;
+    margin-left: 8px;
+    padding: 8px 16px 8px 12px;
+    height: 40px;
+    
+    background: var(--white);
+    
+    cursor: pointer;
+    user-select: none;
+}
+
+.tmpl\$dropdown {
+    display: none;
+    width: 175px;
+    max-height: 300px;
+    overflow: auto;
+    z-index: 1;
+    
+    background: var(--white);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.16);
+    
+    transition: opacity .2s ease;
+    opacity: 0;
+}
+
+.tmpl\$dropdown__list {
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin-block-start: 8px;
+    margin-block-end: 8px;
+}
+
+.tmpl\$dropdown__head-item {
+    padding: 8px 24px;
+    color: var(--generic-gray);
+}
+
+.tmpl\$dropdown__item {
+    padding: 8px 24px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.tmpl\$dropdown__item:hover {
+    background: var(--generic-light-gray);
+}
+
+
+body {
+    margin: 0;
+    background: #F2F2F2;
+    font: 16px 'PT Sans', sans-serif;
+}
+
+.root {
+    box-sizing: border-box;
+    margin-left: 40px;
+}
+
+.link {
+    text-decoration: none;
+    color: #333;
+    transition: all .1s ease;
+}
+
+.link:hover {
+    color: var(--accent-action);
+}
+
+.link:active {
+    color: navy;
+}
+
+.input {
+    box-sizing: border-box;
+    height: 48px;
+    padding-left: 12px;
+    font-size: 18px;
+    background: var(--white);
+    border: 1px solid var(--generic-gray);
+    border-radius: 4px;
+    transition: all .2s ease;
+}
+
+.input:hover {
+    border-color: var(--generic-dark-gray);
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--accent-action);
+}
+
+.input:invalid {
+    border-color: #E72861;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-sizing: border-box;
+    
+    padding: 7px 20px;
+    border-radius: 2px;
+    font: 18px/34px 'PT Sans';
+    
+    text-align: center;
+    transition: all .2s ease;
+    cursor: pointer;
+    border: none;
+    user-select: none;
+}
+
+.button:hover {
+    box-shadow: var(--halfway-shadow);
+}
+
+.button:active {
+    box-shadow: var(--full-shadow);
+}
+
+.button:focus {
+    outline: none;
+}
+
+.site-button {
+    background: var(--button);
+    color: var(--white);
+    box-shadow: var(--halfway-shadow);
+    letter-spacing: .06em;
+}
+
+.site-button:hover {
+    background: var(--button-action);
+}
+
+.reset-button {
+    font-size: 16px;
+}
+
+.save-button {
+    width: 204px;
+    background: var(--accent);
+    color: var(--white);
+    margin-right: 72px;
+    letter-spacing: .06em;
+}
+
+.title {
+    font-family: 'PT Serif', serif;
+}
+
+.header {
+    height: 48px;
+    z-index: 2;
+    border-bottom: 1px solid #CCCCCC;
+    font: 16px 'PT Sans';
+}
+
+.saved-plate, .saved-screening {
+    display: none;
+}
+
+.header__item {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.header__nav {
+    flex-grow: 1;
+}
+
+.header__link {
+    margin-right: 40px;
+}
+
+.currency {
+    font-weight: normal;
+    color: #807e7e;
+}

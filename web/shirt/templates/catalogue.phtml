@@ -1,0 +1,65 @@
+<?
+    rkAssert(["parent_url", "parent_name", "is_master", "category_name", "counter", "card_data", "url"], $_param_);
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/projects/shirt/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/css/catalogue.css">
+        <title>Главное в Жизни — Каталог</title>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:700&display=swap" rel="stylesheet">
+        <script src="/projects/shirt/js/cms-auth.js"></script>
+        <style class="js-style"></style>
+    </head>
+    <body>
+        <? requireTemplate('header'); ?>
+        <main class="root main">
+            <div class="top_block">
+                <div class="top_block__logo">
+                    <img class="main__logo" src="/projects/shirt/img/generic/logo.png">
+                </div>
+                <div class="top_block__heading">
+                    <div class="breadcrumbs">
+                        ← <a class="link" href="/projects/shirt/">Главная</a> ← <a class="link" href="/projects/shirt/catalogue/all/">Каталог</a>
+                        <span class="breadcrumbs__second <?=(!$_param_["is_master"] ? "breadcrumbs__second_visible" : "")?>" hidden>← 
+                            <a class="link" href="/projects/shirt/catalogue/<?=$_param_["parent_url"]?>"><?=$_param_["parent_name"]?></a>
+                        </span>
+                        <span class="breadcrumbs__current"><?=$_param_["name"]?></span>
+                    </div>
+                    <h1 class="top_block__title"><?=$_param_["category_name"]?></h1>
+                </div>
+                <div class="top_block__counter counter"><?=$_param_["counter"]?></div>
+            </div>
+            <div class="left-menu">
+                <ul class="left-menu__list">
+                    <? printMenu(); ?>
+                </ul>
+            </div>
+            <section class="shirt-block">
+                <? printCards($_param_["card_data"]); ?>
+            </section>
+            <input type="hidden" class="url-input" value="<?=$_param_["url"]?>">
+        </main>
+        <? requireTemplate('footer'); ?>
+        
+        <script type="module">
+            import Q from '/projects/for_short.js';
+            import CataloguePageManager from '/projects/shirt/js/CataloguePageManager.js';
+            
+            
+            let pm = new CataloguePageManager(Q(".url-input").value, Q(".left-menu"), Q(".shirt"), Q(".shirt-block"));
+            
+            addOnScrollB(Q(".left-menu"), 180, 64);
+            
+            function addOnScrollB (element, top, min) {
+                document.addEventListener("scroll", () => {
+                    let scrolled = document.documentElement.scrollTop;
+                    element.style.top = (top - scrolled > min ? top - scrolled : min) + "px";
+                    element.style.maxHeight = "calc(100% - " + (top - scrolled > min ? top - scrolled : min) + "px)";
+                });
+            }
+        </script>
+    </body>
+</html>

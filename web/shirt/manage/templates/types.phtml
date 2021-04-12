@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/projects/shirt/manage/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/types.css">
+        <title>Главное в Жизни — Управление типами</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans:400,700|PT+Serif:700&display=swap" rel="stylesheet">
+        <script src="/projects/shirt/manage/js/save.js"></script>
+    </head>
+    <body>
+        <? requireTemplate("header", [], "manage/templates/"); ?>
+        <main class="root main">
+            <div class="list types-list">
+                <? printTypes(); ?>
+                <div class="row type-row add-row type-add-row">
+                    <label class="type-icon">
+                        <input type="file" accept=".png, .svg" class="type-icon-input" hidden>
+                        <div class="type-icon__hover-overlay">
+                            <svg class="type-icon__hover-icon" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 24C21.7614 24 24 21.7614 24 19C24 16.2386 21.7614 14 19 14C16.2386 14 14 16.2386 14 19C14 21.7614 16.2386 24 19 24Z" fill="#FFFCFC" fill-opacity="0.8"/>
+                                <path d="M14.3125 3.375L11.4531 6.5H6.5C4.78125 6.5 3.375 7.90625 3.375 9.625V28.375C3.375 30.0938 4.78125 31.5 6.5 31.5H31.5C33.2188 31.5 34.625 30.0938 34.625 28.375V9.625C34.625
+                                        7.90625 33.2188 6.5 31.5 6.5H26.5469L23.6875 3.375H14.3125ZM19 26.8125C14.6875 26.8125 11.1875 23.3125 11.1875 19C11.1875 14.6875 14.6875 11.1875 19 11.1875C23.3125 11.1875
+                                        26.8125 14.6875 26.8125 19C26.8125 23.3125 23.3125 26.8125 19 26.8125Z" fill="#FFFCFC" fill-opacity="0.8"/>
+                            </svg>
+                        </div>
+                        <svg class="type-list__icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 15H16V19H12V21H16V25H18V21H22V19H18V15ZM28 26H26V15.38L23 16.4V14.7L27.7 13H28V26Z" fill="black"/>
+                        </svg>
+                    </label>
+                    <div class="type-row__content">
+                        <div class="type-name-block">
+                            <input class="input type-name-input">
+                        </div>
+                        <div class="type-nameforms-list">
+                            <input class="input type-nf-input type-nf-a-input"
+                            ><input class="input type-nf-input type-nf-b-input"
+                            ><input class="input type-nf-input type-nf-c-input">
+                        </div>
+                    </div>
+                    <input type="button" class="button site-button type-add-button site-button_disabled" value="+">
+                </div>
+            </div>
+            <div class="size-block">
+                <div class="list sizes-list">
+                <? printSizes(); ?>
+                </div>
+                <div class="row size-row add-row size-add-row">
+                    <input class="input size-input size-num-input"
+                    ><input class="input size-input size-name-input">
+                    <input type="button" class="button site-button size-add-button" value="+ Размер">
+                </div>
+            </div>
+            <div class="list colors-list">
+            <? printColors(); ?>
+                <div class="row add-row color-row color-add-row">
+                    <label class="color-preview color-add-row__color-preview">
+                        <input type="color" class="color-color-input" hidden>
+                    </label>
+                    <input class="input color-name-input">
+                    <input type="button" class="button site-button color-add-button" value="+ Цвет">
+                </div>
+            </div>
+            <template class="type-row-template">
+                <?
+                    requireTemplate("types/type-row", [
+                        'id' => "", 'type_icon' => "", 'type_name' => "", 'type_nf_a' => "", 'type_nf_b' => "", 'type_nf_c' => "",
+                        'type_icon' => "../img/etc/types/default.svg", 'active' => 1
+                    ], "manage/templates/");
+                ?>
+            </template>
+            <template class="size-row-template">
+                <?
+                    requireTemplate("types/size-row", [
+                        'id' => "", 'size_num' => "", 'size_name' => "", "active" => 1
+                    ], "manage/templates/");
+                ?>
+            </template>
+            <template class="color-row-template">
+                <?
+                    requireTemplate("types/color-row", [
+                        'id' => "", 'color_hex' => "", 'color_name' => "", "active" => 1, "is_light" => 0, "is_dark" => 0
+                    ], "manage/templates/");
+                ?>
+            </template>
+        </main>
+        <script type="module">
+            import Q from '/projects/for_short.js';
+            import TypeState from '/projects/shirt/manage/js/TypeState.js';
+            import TypeRow from '/projects/shirt/manage/js/TypeRow.js';
+            import SizeRow from '/projects/shirt/manage/js/SizeRow.js';
+            import ColorRow from '/projects/shirt/manage/js/ColorRow.js';
+            
+            
+            let globalState = new TypeState();
+            
+            Q(".type-row_sendable", true).forEach(row => new TypeRow(row, globalState));
+            Q(".size-row_sendable", true).forEach(row => new SizeRow(row, globalState));
+            Q(".color-row_sendable", true).forEach(row => new ColorRow(row, globalState));
+            
+            Q(".type-add-button").on("click", () => {
+                let oldRow = Q(".type-add-row");
+                let newRow = TypeRow.copy(Q.tmplt(".type-row-template"), oldRow, globalState);
+                
+                oldRow.before(newRow.row.raw);
+                
+                oldRow.to(".type-name-input").value = oldRow.to(".type-nf-a-input").value = "";
+                oldRow.to(".type-nf-b-input").value = oldRow.to(".type-nf-c-input").value = "";
+            });
+            
+            Q(".size-add-button").on("click", () => {
+                let oldRow = Q(".size-add-row");
+                let newRow = SizeRow.copy(Q.tmplt(".size-row-template"), oldRow, globalState);
+                
+                Q(".sizes-list").append(newRow.row.raw);
+                
+                oldRow.to(".size-name-input").value = oldRow.to(".size-num-input").value = "";
+            });
+            
+            Q(".color-add-button").on("click", () => {
+                let oldRow = Q(".color-add-row");
+                let newRow = ColorRow.copy(Q.tmplt(".color-row-template"), oldRow, globalState);
+                
+                oldRow.before(newRow.row.raw);
+                
+                oldRow.to(".color-preview").style.background = "";
+                oldRow.to(".color-name-input").value = "";
+                oldRow.to(".color-color-input").value = "";
+            });
+            
+            setupSaveButton(Q(".save-button"), "/projects/shirt/manage/sql/save-types.php", () => globalState.serialize(), () => globalState.reset());
+            
+            /*setupResetButton(Q(".reset-button"), Q(".saved-screening"), "/projects/shirt/manage/types_content.php", async response => {
+                let result = null;
+                try {
+                    result = await response.clone().json();
+                } catch (err) {
+                    console.log(await response.text());
+                    throw err;
+                }
+                
+                Q(".type-row_sendable", true).remove();
+                Q(".size-row_sendable", true).remove();
+                Q(".color-row_sendable", true).remove();
+                
+                result.types.forEach(type =>
+                    Q(".type-add-row").insertAdjacentHTML("beforebegin", type));
+                
+                result.sizes.forEach(size =>
+                    Q(".sizes-list").insertAdjacentHTML("beforeend", size));
+                
+                result.colors.forEach(color =>
+                    Q(".color-add-row").insertAdjacentHTML("beforebegin", color));
+                    
+                Q(".type-row_sendable", true).forEach(row => setupTypeRow(row, globalState));
+                Q(".size-row_sendable", true).forEach(row => setupSizeRow(row, globalState));
+                Q(".color-row_sendable", true).forEach(row => setupColorRow(row, globalState));
+            });*/
+        
+        </script>
+    </body>
+</html>

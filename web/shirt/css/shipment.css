@@ -1,0 +1,45 @@
+.main {
+    margin-top: 80px;
+}
+
+.section__text {
+    font-size: 18px;
+}
+
+.section_inlined {
+    display: inline-block;
+}
+
+.section_inlined {
+    width: 49.5%;
+    min-width: 470px;
+}
+
+.iconed-list {
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+
+.iconed-list__item {
+    line-height: 1.6em;
+}
+
+.iconed-list__item::before {
+    content: '';
+    display: inline-block;
+    width: 33px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.iconed-list__time::before {
+    background: url(/projects/shirt/img/shipment/time-icon.svg) no-repeat;
+}
+
+.iconed-list__addr::before {
+    background: url(/projects/shirt/img/shipment/flag-icon.svg) no-repeat;
+}
+
+.iconed-list__fee::before {
+    background: url(/projects/shirt/img/shipment/₽-icon.svg) 3.5px 0 no-repeat;
+}

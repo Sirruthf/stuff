@@ -1,0 +1,304 @@
+html {
+	height: 0;
+	min-height: 100%;
+}
+
+body {
+	height: 0;
+	min-height: 100%;
+}
+
+.main {
+	min-height: 100%;
+	padding-right: 24px;
+}
+
+.left-menu {
+	position: fixed;
+	width: 190px;
+	padding-left: 20px;
+	max-height: 100%;
+	box-sizing: border-box;
+	overflow-y: scroll;
+	background: inherit;
+}
+
+.left-menu__list {
+	margin: 0;
+	padding-inline-start: 0;
+	list-style-type: none;
+}
+
+.left-menu__subtitle {
+	font-weight: bold;
+	font-family: 'PT Serif', serif;
+	font-size: 18px;
+}
+
+.left-menu__group {
+	margin-block-start: 16px;
+	margin-block-end: 27px;
+	padding-inline-start: 0;
+	list-style-type: none;
+	line-height: 2em;
+}
+
+.left-menu__item {
+	padding-left: 20px;
+	transition: all 0.1s ease;
+}
+
+.left-menu__item__link {
+	display: block;
+	width: 100%;
+}
+
+.left-menu__item__link:active {
+    color: var(--accent-action);
+}
+
+.left-menu__item:hover {
+	border-radius: 30px;
+	background: var(--generic-light-gray);
+}
+
+.left-menu__item:active {
+	border-radius: 30px;
+	background: var(--generic-gray);
+}
+
+.left-menu__item.selected {
+	border-radius: 30px;
+	background: var(--black);
+}
+
+.left-menu__item.selected .link {
+	color: var(--white);
+	cursor: default;
+}
+
+.top-block {
+    margin-left: 262px;
+    padding: 22px 72px 59px 0;
+}
+
+.add-button {
+    width: 204px;
+}
+
+.top_block__counter {
+	display: flex;
+	align-items: flex-end;
+	padding-bottom: 12px;
+	font-size: 0.9em;
+}
+
+.controls-list {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 544px;
+    margin-top: 32px;
+    font-size: 18px;
+}
+
+.control-all {
+    cursor: pointer;
+    user-select: none;
+}
+
+.control-all__check {
+    margin-right: 8px;
+}
+
+.control-cat-group {
+    display: flex;
+    align-items: center;
+}
+
+.control-cat-dropdown {
+    position: absolute;
+    left: 368px;
+    top: 45px;
+}
+
+.shirt-block {
+    margin-left: 262px;
+}
+
+.shirt {
+    position: relative;
+    display: flex;
+    margin-bottom: 48px;
+    padding: 12px 0;
+    transition: all .2s ease;
+}
+
+.drop-overlay {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 20px 24px;
+    background: #929292B0;
+    opacity: 0;
+    transition: all 70ms ease;
+}
+
+.drop-overlay__sub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 100%;
+    box-sizing: border-box;
+    border: 8px dashed var(--white);
+    background: #C4C4C4;
+    
+    font-size: 26px;
+    color: var(--white);
+}
+
+.drop-overlay__icon {
+    margin-right: 8px;
+}
+
+.drop-overlay__droppable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.shirt__check {
+    margin-top: 16px;
+}
+
+.shirt-main-pic {
+    position: relative;
+    width: 298px;
+    height: 298px;
+    margin-left: 8px;
+}
+
+.shirt-row__right-block {
+    flex-grow: 1;
+    max-width: 920px;;
+}
+
+.input-list {
+    display: flex;
+    margin-left: 32px;
+}
+
+.input-cont {
+    margin-right: 16px;
+}
+
+.input-cont__desc {
+    margin-bottom: 8px;
+}
+
+.name-input-cont {
+    flex-basis: 237px;
+}
+
+.price-input-cont {
+    flex-basis: 123px;
+}
+
+.discount-input-cont {
+    flex-basis: 81px;
+}
+
+.comm-input-cont {
+    flex-basis: 289px;
+    flex-grow: 1;
+}
+
+.shirt-input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.foto-block {
+    margin-left: 32px;
+    margin-top: 24px;
+}
+
+.foto-block__content {
+    display: flex;
+    margin-top: 8px;
+}
+
+.foto-list {
+    display: flex;
+    max-width: 100%;
+    overflow: auto;
+    min-height: 168px;
+}
+
+.foto-list:not(:empty) {
+    margin-right: 24px;
+}
+
+.foto-cont {
+    position: relative;
+}
+
+.foto-cont:not(:first-child) {
+    margin-left: 24px;
+}
+
+.image-mark-button {
+    fill: #7D7B7B;
+    transition: all .12s ease;
+}
+
+.preview-pic .image-mark-button {
+    fill: var(--accent);
+}
+
+.shirt__foto {
+    height: 168px;
+}
+
+.foto-buttons-list {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    opacity: 0;
+    
+    transition: all .2s ease;
+}
+
+.foto-cont:hover .foto-buttons-list {
+    opacity: 1;
+}
+
+.foto-cont__button {
+    cursor: pointer;
+}
+
+.add-image-button {
+    background: var(--black);
+    color: var(--white);
+    font-size: 18px;
+    padding: 8px;
+}
+
+.fade {
+	margin-right: 12px;
+	margin-left: -12px;
+	opacity: 0;
+}
+
+.unfade {
+	margin-right: -12px;
+	opacity: 0;
+}

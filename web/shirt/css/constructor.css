@@ -1,0 +1,46 @@
+.uploaded {
+    position: relative;
+    height: 552px;
+    width: 552px;
+    background: url(/projects/shirt/img/etc/bg.png) 0 0/contain no-repeat #DAD7D2;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.photo-section__button {
+    margin: auto;
+    margin-top: 64px;
+    line-height: normal;
+    padding-top: 12px;
+}
+
+.user-img {
+    position: absolute;
+    min-width: 100px;
+    min-height: 100px;
+    width: 0;
+    height: 0;
+    border: 1px solid #E728A2;
+    cursor: grab;
+    transition: all .6s ease;
+}
+
+.user-img:active {
+    cursor: grabbing;
+}
+
+.user-img__button {
+    position: absolute;
+    bottom: -14px;
+    right: -14px;
+    
+    width: 16px;
+    height: 16px;
+    padding: 8px;
+    background: #E728A2;
+    cursor: nwse-resize;
+}
+
+.user-img__button_template {
+    display: none;
+}

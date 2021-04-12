@@ -1,0 +1,6 @@
+<? rkAssert(["id", "size_num", "size_name", "tab_id"], $_param_); ?>
+
+<div class="row" data-key="<?=$_param_["id"]?>">
+    <div class="cell row__desc"><span class="size_num"><?=$_param_["size_num"]?></span> <?=$_param_["size_name"]?></div>
+    <? printCells($_param_["id"], $_param_["tab_id"]); ?>
+</div>

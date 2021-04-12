@@ -1,0 +1,133 @@
+<?
+    rkAssert(["cart_data", "img-list", "img-prevs", "url", "qnt_table", "name", "desc"], $_param_);
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0">
+        <link rel="stylesheet" href="/projects/shirt/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/css/productly.css">
+        <link rel="stylesheet" href="/projects/shirt/css/product.css">
+        <title>Главное в Жизни — Футболка</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans:400,700|PT+Serif:700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <? require 'templates/header.phtml' ?>
+        <nav class="root breadcrumbs">
+            ← <a class="link" href="/projects/shirt/">Главная</a>
+            ← <a class="link" href="/projects/shirt/catalogue/<?=$_param_["url"]?>">Каталог</a>
+            ← <span><?=$_param_["name"]?></span>
+        </nav>
+        <main class="root main">
+            <div class="image-block">
+                <div class="full-image_cont">
+                    <? printImages($_param_["img-list"], $_param_["product_id"]); ?>
+                </div>
+                <div class="prev-image_cont">
+                    <? printImagePreview($_param_["img-list"], $_param_["product_id"]); ?>
+                </div>
+            </div>
+            <div class="options-block">
+                <h1 class="main__header"><?=$_param_["name"]?></h1>
+                <div class="main__desc">Состав: <?=$_param_["shirt_desc"]?></div>
+                <div class="options-block__unit type-unit type-list">
+                    <? printTypeButtons($_param_["product_id"]); ?>
+                </div>
+                <div class="options-block__unit size-unit">
+                    <h3 class="unit__title">Размер</h3><span class="size-unit__button">Таблица размеров</span>
+                    <div class="size-list">
+                    <? printSizeButtons($_param_["product_id"]); ?>
+                    </div>
+                </div>
+                <div class="options-block__unit color-unit">
+                    <h3 class="unit__title">Цвет</h3>
+                    <div class="color-list">
+                    <? printColorButtons($_param_["product_id"]); ?>
+                    </div>
+                </div>
+                <div class="options-block__unit quantity-unit">
+                    <h3 class="unit__title quantity-unit__title">Количество</h3>
+                    <div class="quantity-container">
+                        <input type="button" class="quantity-unit__button qnt-button control-button" value="−" onclick="this.nextElementSibling.stepDown()"
+                        ><input type="number" min="1" class="quantity-unit__input control-input quantity-input" value="1"
+                        ><input type="button" class="quantity-unit__button qnt-button control-button" value="+" onclick="this.previousElementSibling.stepUp()">
+                    </div>
+                    <div class="quantity-unit__notification"><span class="quantity_warning" hidden>⚠</span> на складе: <span class="quantity_counter">0</span></div>
+                </div>
+                <div class="options-block__unit buy-unit">
+                    <div class="price-container">
+                        <div class="price"><?=formatPrice($_param_["price"])?> ₽</div>
+                    </div>
+                    <div class="buy-button-list">
+                        <div class="buy-button-container">
+                            <input class="button buy-unit__button buy-button" type="button" value="Заказать">
+                        </div>
+                        <div class="button buy-unit__button fav-button">
+                            <svg width="20" height="19" viewBox="-2 -2 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="fav-button__path"
+                                    d="M14.5 0C12.76 0 11.09 0.81 10 2.08C8.91 0.81 7.24 0 5.5 0C2.42 0 0 2.41 0 5.5C0 9.27 3.4 12.36 8.55 17.03L10 18.35L11.45 17.03C16.6 12.36 20 9.27 20 5.5C20 2.41 17.58 0 14.5 0Z"
+                                    fill="transparent" stroke="#377DD2" stroke-width="2" stroke-dasharray="280% 280%" stroke-dashoffset="0%">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="shipment-unit">
+                    Доставка по Москве <select class="shipment__select">
+                        <option>от 1 дня от 0 Р</option>
+                        <option>10 дней 1000 Р</option>
+                        <option>3 дня +подарок</option>
+                    </select>
+                </div>
+            </div>
+            
+            <input type="hidden" class="product_id" value="<?=$_param_["product_id"]?>">
+            <input type="hidden" class="stock_left" value='<?=$_param_["qnt_table"]?>'>
+            <input type="hidden" class="cart-contents" value='<?=$_param_['cart_data']?>'>
+        </main>
+        <? require 'templates/footer.phtml'; ?>
+        <script type="module" src="/projects/shirt/js/product.js"></script>
+        <script type="module">
+            import Q from '/projects/for_short.js';
+            import Cart from '/projects/shirt/js/Cart.js';
+            
+            
+            let cart = new Cart(Q(".cart-contents").value);
+            
+            Q(".buy-button").on("click", () =>
+                cart.add({ tid: product_id, cid: table.selected.id, quantity: Q(".quantity-input").value }));
+            
+            let animateHeart = (() => {
+                let animating = false;
+                
+                return function (heart, button) {
+                    heart.on("transitionend", () => animating = false);
+                    
+                    button.on("mouseenter", () => {
+                        if (animating) return; animating = true;
+                        heart.setAttribute("stroke-dashoffset", 560 + parseInt(heart.getAttribute("stroke-dashoffset").replace("%", "")) + "%");
+                    });
+                };
+            })();
+            
+            function setupGallery (top, bottom) {
+                let selected = 0;
+                let bottomClass = "prev-image_cont__img_selected";
+                
+                bottom.forEach(image => image.on("click", () => {
+                    bottom.find(bimage => bimage.hasClass(bottomClass)).class(bottomClass, false);
+                    image.class(bottomClass);
+                    
+                    selected = image.dataset.order;
+                    top.forEach(timage => timage.style.left = -100 * selected + "%");
+                }));
+            }
+            
+            
+            setupGallery(Q(".full-image_cont__img", true), Q(".prev-image_cont__img", true));
+            animateHeart(Q(".fav-button__path"), Q(".fav-button"));
+        </script>
+    </body>
+</html>

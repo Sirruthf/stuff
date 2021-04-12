@@ -1,0 +1,10 @@
+<? rkAssert(["lbound", "selected", "title", "url"], $_param_) ?>
+
+<li>
+    <ul class="left-menu__group">
+        <li class="left-menu__item left-menu__subtitle <?=($_param_["selected"] ? "selected" : "") ?>" data-href="<?=$_param_["url"]?>">
+            <a class="left-menu__item__link link" href="/projects/shirt/catalogue/<?=$_param_["url"]?>"><?=$_param_["title"]?></a>
+        </li>
+        <? printMenuRows($_param_["lbound"]) ?>
+    </ul>
+</li>

@@ -1,0 +1,8 @@
+<? $_arglist = ["color_id", "is_active", "too_bright", "too_dark"] ?>
+
+<label class="color-list__item color-button control-button">
+    <input class="color-list__select" type="radio" name="colors" value="<?= $_param_["color_id"] ?>" <?=($_param_['is_active'] ? "checked" : "")?> hidden>
+    <svg class="color-list__button <?=$_param_["too_bright"] ? "color-list__button_bordered" : "" ?>" viewbox="0 0 320 320" style="background: <?=$_param_["color"]?>;">
+        <path class="color-list__button__path <?= $_param_["too_dark"] ? "color-list__button__path_light" : "" ?>" d="M73 160 l69 65 l105 -130" fill="transparent" stroke="#1C2932" stroke-width="17" stroke-dasharray="0% 100%" />
+    </svg>
+</label>

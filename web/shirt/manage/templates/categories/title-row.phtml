@@ -1,0 +1,16 @@
+<?
+    rkAssert(["id", "selected", "assoc", "loc_name", "url", "rename-icon", "copy-icon", "del-icon"], $_param_);
+?>
+
+<div class="row title-row">
+    <div class="cat-url-doubler">{url}</div>
+    <input name="id" class="input id-input" value="<?=$_param_["id"]?>" hidden>
+    <span class="cat-name-button<?=$_param_["selected"] ? " cat-name-button_selected" : ""?>" data-assoc="<?=$_param_["assoc"]?>"><input name="loc_name" class="input inline-input cat-name-input sendable" value="<?=$_param_["loc_name"]?>" disabled></span>
+    <label class="cat-url-wrap">
+        <input name="url" class="input inline-input cat-url-input sendable" value="<?=$_param_["url"]?>" required disabled>
+        <div class="cat-url-after">/</div>
+    </label>
+    <span class="row__button rename-button"><?require $_param_["rename-icon"]?></span>
+    <span class="row__button copy-button"><?require $_param_["copy-icon"]?></span>
+    <span class="row__button del-button"><?require $_param_["del-icon"]?></span>
+</div>

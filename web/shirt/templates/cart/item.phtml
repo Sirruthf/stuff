@@ -1,0 +1,32 @@
+<?
+    rkAssert(["tid", "cid", "type_id", "price", "product_img", "product_title", "product_price"], $_param_);
+?>
+
+
+<li class="card card_trusted">
+    <div>
+        <img class="card__img" src="/projects/shirt/img/product/<?="{$_param_["tid"]}/{$_param_["product_img"]}"?>">
+        <div class="link delete-button">Удалить</div>
+    </div>
+    <div class="card__desc">
+        <input class="card-tid" value="<?=$_param_["tid"]?>" type="hidden">
+        <input class="card-cid" value="<?=$_param_["cid"]?>" type="hidden">
+        <input class="card-type-id" value="<?=$_param_["type_id"]?>" type="hidden">
+        <input class="card-price" value="<?=$_param_["price"]?>" type="hidden">
+        <div class="card__head-row">
+            <h1 class="card__title"><?=$_param_["product_title"]?></h1>
+            <span class="card__price"><?=$_param_["product_price"]?> ₽</span>
+        </div>
+        <div class="card__row">Состав: <?=$_param_["product_desc"]?></div>
+        <div class="card__row">Цвет: <?=$_param_["product_color"]?></div>
+        <div class="card__row">Размер: <?=$_param_["product_size"]?></div>
+        <div class="card__row">
+            Количество
+            <div class="quantity-unit">
+                <input type="button" class="quantity-unit__button quantity-unit__minus-button" value="−"
+                ><input type="number" min="1" class="quantity-unit__input card-quantity" value="<?=$_param_["product_quantity"]?>"
+                ><input type="button" class="quantity-unit__button quantity-unit__plus-button" value="+">
+            </div>
+        </div>
+    </div>
+</li>

@@ -1,0 +1,5 @@
+<? rkAssert(["is_selected", "assoc", "id"], $_param_); ?>
+
+<div class="page<?=$_param_["is_selected"] ? " page_selected" : "" ?>" data-assoc="<?=$_param_["assoc"]?>" data-key="<?=$_param_["id"]?>">
+    <? printRows($_param_["id"]); ?>
+</div>

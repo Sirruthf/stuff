@@ -1,0 +1,17 @@
+<? rkAssert(["id", "color_hex", "color_name", "active", "is_dark", "is_light"], $_param_); ?>
+
+<div class="row color-row color-row_sendable">
+    <input class="color-id-input" value="<?=$_param_["id"]?>" type="hidden">
+    <label class="color-preview" style="background: <?=$_param_["color_hex"]?>;">
+        <input type="color" class="color-color-input sendable" value="<?=$_param_["color_hex"]?>" hidden>
+    </label>
+    <input class="input color-name-input sendable" value="<?=$_param_["color_name"]?>">
+    <div class="color__controls">
+        <div class="color-checkboxes-list">
+            <? requireTemplate("types/checkbox", ["active" => $_param_["active"]], "manage/templates/"); ?>
+            <? requireTemplate("types/checkbox", ["active" => $_param_["is_dark"]], "manage/templates/"); ?>
+            <? requireTemplate("types/checkbox", ["active" => $_param_["is_light"]], "manage/templates/"); ?>
+        </div>
+        <? requireTemplate("types/del-button", [], "manage/templates/"); ?>
+    </div>
+</div>

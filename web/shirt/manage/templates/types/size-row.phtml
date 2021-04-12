@@ -1,0 +1,11 @@
+<? rkAssert(["id", "size_num", "size_name", "active"], $_param_); ?>
+
+<div class="row size-row size-row_sendable">
+    <input class="size-id-input" value="{id}" hidden>
+    <input class="input size-input size-num-input sendable" value="<?=$_param_["size_num"]?>"
+    ><input class="input size-input size-name-input sendable" value="<?=$_param_["size_name"]?>">
+    <div class="size-controls">
+        <? requireTemplate("types/checkbox", ["active" => $_param_["active"]], "manage/templates/"); ?>
+        <? requireTemplate("types/del-button", [], "manage/templates/"); ?>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<? rkAssert(["is_selected", "assoc", "tab_icon"], $_param_) ?>
+
+<div class="tab<?= $_param_["is_selected"] ? " tab_selected" : "" ?>" data-assoc="<?=$_param_["assoc"]?>">
+    <? require $_param_["tab_icon"]; ?>
+</div>

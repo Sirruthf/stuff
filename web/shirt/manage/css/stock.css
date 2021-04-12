@@ -1,0 +1,85 @@
+.tabs-list {
+    display: flex;
+    height: 64px;
+}
+
+.tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F9F9F9;
+    flex-basis: 160px;
+    height: 62px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: all .2s ease;
+    border-bottom: 0 solid transparent;
+}
+
+.tab_selected {
+    background: var(--white);
+    border-bottom: 2px solid var(--white);
+}
+
+.type-list__icon__path {
+    transition: all .2s ease;
+}
+
+.tab_selected .type-list__icon__path {
+    fill: var(--accent);
+}
+
+.pages-list {
+    padding: 32px 24px;
+    margin-right: 40px;
+    background: white;
+}
+
+.page {
+    display: none;
+    flex-direction: column;
+    max-width: 800px;
+}
+
+.page_selected {
+    display: flex;
+}
+
+.row {
+    display: flex;
+    height: 48px;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    min-width: 64px;
+}
+
+.color-stump {
+    display: none;
+    box-sizing: border-box;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.color-stump_too-bright {
+    border: .8px solid var(--generic-gray);
+}
+
+.quantity-input {
+    box-sizing: border-box;
+    border: none;
+    min-width: 64px;
+    width: calc(30%);
+    padding-left: 3px;
+    font: bold 16px 'PT Sans';
+    background: transparent;
+    color: #666666;
+    border: 1px solid transparent;
+}
+
+.quantity-input:focus {
+    outline: none;
+}

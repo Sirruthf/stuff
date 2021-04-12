@@ -1,0 +1,12 @@
+<?
+    rkAssert(["selected", "url", "name", "id"], $_param_);
+?>
+
+<li>
+    <ul class="left-menu__group">
+        <li class="left-menu__item left-menu__subtitle<?= $_param_["selected"] ? " selected" : ""?>">
+            <a href="/projects/shirt/manage/catalogue/<?=$_param_["url"]?>/" data-href="<?=$_param_["url"]?>" class="link left-menu__item__link"><?=$_param_["name"]?></a>
+        </li>
+        <? printRows($_param_["id"]) ?>
+    </ul>
+</li>

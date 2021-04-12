@@ -1,0 +1,290 @@
+.header__right {
+	 width: 88px;
+}
+ .title {
+	 text-align: center;
+	 margin-top: 0;
+	 font-family: 'PT Serif', serif;
+}
+ .title__text {
+	 background: linear-gradient(#ffc165, #ffc165) 0 1.05em/auto 8px repeat-x;
+	 transition: all 0.25s ease;
+	 cursor: default;
+}
+ .title:hover > .title__text {
+	 background-position: 0 12px;
+	 background-size: auto calc(80% - 4.6px);
+}
+ .block {
+	 display: inline-block;
+	 vertical-align: top;
+}
+ .sm-link {
+	 height: 16px;
+}
+ .sm-link__img_path {
+	 transition: all 0.2s ease;
+}
+ .sm-link:hover .sm-link_vk__img_path {
+	 fill: #4e7ec0;
+}
+ .sm-link:hover .sm-link_insta__img_path_1 {
+	 fill: url(#paint0_linear);
+}
+ .sm-link:hover .sm-link_insta__img_path_2 {
+	 fill: url(#paint1_linear);
+}
+ .sm-link:hover .sm-link_insta__img_path_3 {
+	 fill: url(#paint2_linear);
+}
+ .sm-link:hover .sm-link_face__img_path {
+	 fill: #2841b1;
+}
+ .contacts_block {
+	 display: flex;
+	 justify-content: stretch;
+	 max-width: 1128px;
+	 width: 100%;
+	 height: 112px;
+	 margin: auto;
+}
+ .contacts_block__group {
+	 display: flex;
+	 flex-grow: 1;
+	 justify-content: space-between;
+}
+ .contacts_block__item {
+	 display: flex;
+	 align-items: center;
+}
+ .contacts_block__item__icon {
+	 margin-right: 16px;
+}
+ .contacts_block__creds__header {
+	 font: bold 24px/22px 'PT Serif';
+	 margin: 0 0 6px 16px;
+}
+ .contacts_block__comms__phone {
+	 font: bold 1.125em 'PT Sans';
+}
+ .contacts_block__basket {
+	 position: relative;
+	 margin-left: 126px;
+}
+ .contacts_block__basket__button {
+	 display: flex;
+	 border-radius: 50%;
+	 width: 64px;
+	 height: 64px;
+	 justify-content: center;
+	 align-items: center;
+	 background: #ffa824 33;
+}
+ .contacts_block__basket__counter {
+	 position: absolute;
+	 bottom: 18px;
+	 right: 0;
+	 background: #333;
+	 color: #fffcfc;
+	 width: 24px;
+	 height: 24px;
+	 line-height: 24px;
+	 text-align: center;
+	 border-radius: 50%;
+}
+ .intro_block {
+	 position: relative;
+	 color: white;
+	 height: 420px;
+	 font-family: 'PT Serif', serif;
+	 z-index: 1;
+	 border-radius: 4px;
+	 background: url(/projects/shirt/img/main/main.png);
+}
+ .intro_block__header {
+	 position: absolute;
+	 top: 24px;
+	 left: 86px;
+	 font-size: 48px;
+	 font-weight: bold;
+	 line-height: 55px;
+	 letter-spacing: 0.01em;
+}
+ .intro_block__desc {
+	 position: absolute;
+	 top: 220px;
+	 left: 86px;
+	 font-size: 1.5em;
+	 font-family: 'PT Sans', sans-serif;
+}
+ .intro_block__notes {
+	 position: absolute;
+	 display: flex;
+	 flex-direction: column;
+	 justify-content: space-between;
+	 height: 230px;
+	 top: 88px;
+	 right: 110px;
+	 font-size: 1.5em;
+	 line-height: 1.1;
+}
+ .intro_block__note {
+	 display: inline-block;
+	 position: relative;
+	 vertical-align: top;
+	 padding: 16px;
+	 cursor: default;
+	 transition: all 0.2s ease;
+}
+ .intro_block__note:hover {
+	 box-shadow: var(--full-shadow);
+}
+ .intro_block__note__header {
+	 display: inline-block;
+	 margin: 0 19px 0 0;
+	 font-family: 'PT Sans', sans-serif;
+	 font-weight: bold;
+	 font-size: 2em;
+	 transition: all 0.2s ease;
+}
+ .intro_block__note__desc {
+	 font-size: 0.76em;
+	 font-family: 'PT Sans', sans-serif;
+	 background-image: linear-gradient(#ccc, #ccc);
+	 background-position: 0 1.2em;
+	 background-repeat: no-repeat;
+	 background-size: 0 1px;
+	 transition: all 0.25s ease;
+}
+ .intro_block__note:hover .intro_block__note__desc {
+	 background-size: 100% 1px;
+}
+ @media screen and (max-width: 1440px) {
+	 .main {
+		 padding: 0 calc(50% - 650px);
+	}
+	 .header-shape {
+		 margin-left: calc(50% - 718px);
+	}
+}
+ @media screen and (max-width: 1300px) {
+	 .main-img {
+		 margin-left: calc(50% - 650px);
+	}
+}
+ .desc-wrapper {
+	 display: inline-block;
+}
+ .hot-cats_block {
+	 display: flex;
+	 justify-content: space-between;
+	 flex-wrap: wrap;
+	 padding: 50px 125px 38px 107px;
+	 font-family: 'PT Serif', serif;
+	 font-size: 1.5em;
+}
+ .hot-cats_block__item {
+	 white-space: nowrap;
+	 transition: all 0.2s ease;
+}
+ .hot-cats_block__item__svg {
+	 position: relative;
+	 width: 24px;
+	 height: 24px;
+	 top: 0.2em;
+	 margin-right: 16px;
+}
+ .hot-cats_block__item__path {
+	 transition: fill 0.2s ease;
+}
+ .hot-cats_block__item:hover .hot-cats_block__item__path {
+	 fill: #0085e5;
+}
+ .shirt-block {
+	 padding: 24px 64px 0 24px;
+}
+ .main__banners {
+	 display: flex;
+	 justify-content: space-between;
+	 padding: 4px 130px 0 86px;
+}
+ .construct-block {
+	 position: relative;
+	 background: url(/projects/shirt/img/main/construct.png);
+	 width: 704px;
+	 height: 472px;
+	 margin-top: 20px;
+}
+ .construct-block__title {
+	 position: absolute;
+	 text-align: center;
+	 top: 125px;
+	 right: 20px;
+	 font-size: 40px;
+	 line-height: 1.2em;
+	 font-family: 'PT Serif', serif;
+}
+ .construct-block__title__text {
+	 background-image: linear-gradient(#6ed3ec, #6ed3ec);
+}
+ .construct-block__desc {
+	 position: absolute;
+	 text-align: center;
+	 top: 240px;
+	 right: 16px;
+	 width: 255px;
+	 line-height: 1.4em;
+	 font-size: 18px;
+}
+ .construct-block__button {
+	 position: absolute;
+	 top: 314px;
+	 right: 72px;
+	 width: 143px;
+}
+ .corporate-block {
+	 text-align: center;
+	 font-family: 'PT Serif', serif;
+}
+ .corporate-block__img {
+	 margin-right: 40px;
+}
+ .corporate-block__title {
+	 margin: 34px 0 20px;
+	 font-size: 1.5em;
+	 line-height: 1.2em;
+	 letter-spacing: 0.01em;
+}
+ .corporate-block__desc {
+	 line-height: 1.5em;
+}
+ .corporate-block__button {
+	 width: 144px;
+	 margin: auto;
+	 margin-top: 36px;
+}
+ .main__instateaser {
+	 margin-top: 122px;
+}
+ .instateaser__title {
+	 font-size: 2.5em;
+	 font-family: 'PT Serif', serif;
+	 margin: 0px 86px 31px;
+}
+ .photos {
+	 display: flex;
+	 flex-wrap: wrap;
+	 justify-content: space-evenly;
+	 padding: 0 64px 0 24px;
+}
+ .instateaser__photo {
+	 margin-bottom: 64px;
+	 transition: all 0.2s ease;
+}
+ .instateaser__photo:hover {
+	 box-shadow: var(--halfway-shadow);
+}
+ .ol_price {
+	 margin-left: 8px;
+}
+ 

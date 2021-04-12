@@ -1,0 +1,14 @@
+.feature-list {
+    display: flex;
+    font-size: 1.2em;
+}
+
+.feature-list__item {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 16px;
+}
+
+.feature-list__link {
+    display: block;
+    padding: 16px 24px;
+}

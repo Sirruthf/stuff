@@ -1,0 +1,152 @@
+.main {
+    display: flex;
+    margin-top: 21px;
+}
+
+.cat-block {
+    width: 520px;
+    padding-top: 23px;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    font: bold 18px/24px 'PT Serif';
+    flex-basis: 430px;
+    flex-grow: 1;
+}
+
+.sub-cat-block {
+    padding: 28px 47px;
+    font: 18px/24px 'PT Sans';
+    flex-basis: 555px;
+    flex-grow: 3;
+}
+
+.sub-cat-block__page {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sub-cat-block__page_visible {
+    display: flex;
+}
+
+.cat-title {
+    font-size: 24px;
+    padding-left: 12px;
+    font-family: 'PT Serif';
+}
+
+.inline-input {
+    border: none;
+    background: none;
+    font: inherit;
+}
+
+.row {
+    display: inline-flex;
+    height: 48px;
+    padding: 0 22px 0 14px;
+    margin: 8px 0;
+    
+    font: bold 18px 'PT Serif';
+    border-radius: 4px;
+    align-items: center;
+    outline: solid 1px transparent;
+    transition: all .12s ease;
+}
+
+.row:hover, .row_active {
+    background: #FFFCFC;
+}
+
+.row_active {
+    outline: solid 1px #0085E5;
+}
+
+.row_invalid {
+    outline: solid 1px #E72861;
+}
+
+.row__button {
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.row__button:hover {
+    box-shadow: var(--full-shadow);
+}
+
+.cat-name-button {
+    border-radius: 16px;
+    height: 32px;
+    padding-left: 16px;
+    margin-left: -16px;
+    margin-right: 16px;
+    transition: background .2s ease;
+}
+
+.cat-name-button_selected {
+    background: #333;
+    color: #FFFCFC;
+}
+
+.cat-name-input {
+    box-sizing: border-box;
+    height: 100%;
+    color: inherit;
+}
+
+.cat-url-wrap {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.cat-url-prep {
+    color: #7D7B7B;
+}
+
+.cat-url-input {
+    padding-left: 0;
+}
+
+.cat-url-doubler {
+    position: absolute;
+    visibility: hidden;
+    white-space: pre;
+}
+
+.cat-url-after {
+    position: absolute;
+}
+
+.add-row {
+    display: block;
+    margin-top: 28px;
+    padding: 0 22px 0 14px;
+    font: 16px 'PT Sans';
+}
+
+.add-row__block {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    height: 48px;
+}
+
+.add-cat-url-input {
+    margin-left: 16px;
+}
+
+.add-button {
+    font: 36px/1em 'PT Sans';
+    background: #333;
+    color: #FFFCFC;
+    height: 100%;
+    width: 80px;
+    margin-left: 12px;
+}
+
+input.add-button[disabled] {
+    background: #DAD7D2;
+    pointer-events: none;
+}

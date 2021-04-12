@@ -1,0 +1,133 @@
+<?
+    rkAssert(["cart_data", "tid", "qnt_table"], $_param_);
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/projects/shirt/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/css/productly.css">
+        <link rel="stylesheet" href="/projects/shirt/css/constructor.css">
+        <title>Главное в Жизни — Конструктор</title>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <? require 'templates/header.phtml' ?>
+        
+        <nav class="root breadcrumbs">← <a class="link" href="/projects/shirt/">Главная</a></nav>
+        <main class="root main">
+            <div class="image-block">
+                <div class="uploaded"></div>
+                <input class="button image-button" type="file" accept="image/*">
+            </div>
+            <div class="options-block">
+                <h1 class="main__header">Конструктор</h1>
+                <div class="main__desc">Состав: 100% хлопок</div>
+                <div class="options-block__unit type-unit type-list">
+                    <? printTypeButtons($_param_["tid"]); ?>
+                </div>
+                <div class="options-block__unit size-unit">
+                    <h3 class="unit__title">Размер</h3><span class="size-unit__button">Таблица размеров</span>
+                    <div class="size-list">
+                        <? printSizeButtons($_param_["tid"]); ?>
+                    </div>
+                </div>
+                <div class="options-block__unit color-unit">
+                    <h3 class="unit__title">Цвет</h3>
+                    <div class="color-list">
+                        <? printColorButtons($_param_["tid"]); ?>
+                    </div>
+                </div>
+                <div class="options-block__unit quantity-unit">
+                    <h3 class="unit__title quantity-unit__title">Количество</h3>
+                    <div class="quantity-container">
+                        <input type="button" class="quantity-unit__button qnt-button" value="−" onclick="this.nextElementSibling.stepDown()"
+                        ><input type="number" min="1" class="quantity-unit__input quantity-input" value="1"
+                        ><input type="button" class="quantity-unit__button qnt-button" value="+" onclick="this.previousElementSibling.stepUp()">
+                    </div>
+                    <div class="quantity-unit__notification"><span class="quantity_warning" hidden>⚠</span> на складе: <span class="quantity_counter">0</span></div>
+                </div>
+                <div class="options-block__unit buy-unit">
+                    <div class="price-container">
+                        <div class="price">1 300 ₽</div>
+                    </div>
+                    <input type="button" class="button buy-unit__button buy-button" value="Заказать">
+                    <div class="button buy-unit__button fav-button">
+                        <svg width="20" height="19" viewBox="-2 -2 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="fav-button__path" d="M14.5 0C12.76 0 11.09 0.81 10 2.08C8.91 0.81 7.24 0 5.5 0C2.42 0 0 2.41 0 5.5C0 9.27 3.4 12.36 8.55 17.03L10 18.35L11.45 17.03C16.6 12.36 20 9.27 20 5.5C20 2.41 17.58 0 14.5 0Z
+                            " fill="transparent" stroke="#377DD2" stroke-width="2" stroke-dasharray="280% 280%" stroke-dashoffset="0%">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="shipment-unit">
+                    Доставка по Москве <select class="shipment__select">
+                        <option>от 1 дня от 0 Р</option>
+                        <option>10 дней 1000 Р</option>
+                        <option>3 дня +подарок</option>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" class="stock_left" value='<?=$_param_["qnt_table"]?>'>
+            <input type="hidden" class="cart-contents" value='<?=$_param_["cart_data"]?>'>
+        </main>
+        <template class="user-img__button_template">
+            <div class="user-img__button">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.76052 6.57311C7.82992 6.50368 7.86465 6.42377 7.86465 6.33351C7.86465 6.24321 7.82996 6.1633 7.76052 6.09391L4.30216 2.63555L5.80234 1.13555C5.93406 1.00358 6.00013 0.847497 
+                    6.00013 0.666821C6.00013 0.486144 5.93406 0.329876 5.80234 0.197944C5.67023 0.0659759 5.51392 4.63889e-05 5.33336 4.6381e-05L0.666592 4.6177e-05C0.486061 4.61691e-05 0.329867 0.0659756 
+                    0.197862 0.197944C0.0660395 0.329985 -3.67377e-05 0.486253 -3.67456e-05 0.66682L-3.69496e-05 5.33355C-3.69575e-05 5.51412 0.0660393 5.67031 0.197861 5.80228C0.32983 5.93417 0.486024 6.00018 
+                    0.666591 6.00018C0.847159 6.00018 1.00346 5.93417 1.13558 5.80228L2.63528 4.30228L6.09386 7.76064C6.16329 7.83004 6.24294 7.86474 6.33335 7.86474C6.42376 7.86474 6.50338 7.82997 6.57306 7.76064L7.76052 6.57311Z" fill="white"/>
+                    <path d="M15.8021 15.8023C15.9341 15.6704 16 15.5141 16 15.3336L16 10.6668C16 10.4863 15.9341 10.3302 15.8021 10.1981C15.6702 10.0662 15.5139 10.0003 15.3334 10.0003C15.1528 10.0003 14.9965 
+                    10.0662 14.8646 10.1981L13.3646 11.6979L9.90627 8.23954C9.83673 8.17018 9.75694 8.13541 9.66667 8.13541C9.57641 8.13541 9.49647 8.17018 9.42707 8.23954L8.23954 9.42722C8.17011 9.49661
+                    8.13544 9.5763 8.13544 9.66667C8.13544 9.75705 8.17011 9.83673 8.23954 9.90613L11.6979 13.3647L10.198 14.8644C10.0661 14.9965 9.99997 15.1529 9.99997 15.3334C9.99997 15.514 10.0661 15.6701 
+                    10.198 15.8022C10.3299 15.934 10.4862 15.9999 10.6667 15.9999L15.3335 15.9999C15.5142 16.0001 15.6702 15.9345 15.8021 15.8023Z" fill="white"/>
+                </svg>
+            </div>
+        </template>
+        <? require 'templates/footer.phtml'; ?>
+        <script type="module" src="/projects/shirt/js/product.js"></script>
+        <script type="module">
+            import Q from '/projects/for_short.js';
+            import CImage from '/projects/shirt/js/Image.js';
+            import Cart from '/projects/shirt/js/Cart.js';
+            
+            
+            let image = null;
+            let cart = new Cart(Q(".cart-contents").value);
+            
+            Q(".image-button").on("input", event => {
+                if (image) image.destructor();
+                
+                image = new CImage(Q(".image-button").files[0], {
+                    container: Q(".uploaded"),
+                    button: Q.tmplt(".user-img__button_template")
+                });
+            });
+            
+            Q(".buy-button").on("click", async () => {
+                if (!image.id) {
+                    let form = new FormData();
+                    
+                    form.append("image", Q(".image-button").files[0]);
+                    
+                    image.id = await fetch("/projects/shirt/stage_picture/", {
+                        method: "POST",
+                        body: form
+                    }).then(response => response.text());
+                }
+                
+                cart.addCustom({
+                    id: image.id,
+                    type: Q(".type-list__select:checked").value,
+                    size: Q(".size-list__select:checked").value,
+                    color: Q(".color-list__select:checked").value,
+                    left: image.left, top: image.top,
+                    width: image.width, height: image.height,
+                    quantity: Q(".quantity-unit__input").value
+                });
+            });
+        </script>
+    </body>
+</html>

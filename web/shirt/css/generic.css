@@ -1,0 +1,232 @@
+:root {
+    --halfway-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    --full-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+}
+
+html {
+    min-height: 100%;
+    height: 42px;
+}
+
+body {
+    position: relative;
+    font-family: 'PT Sans', sans-serif;
+    margin: 0;
+    background: #FFFCFC;
+    min-height: calc(100% - 80px);
+    padding-bottom: 79px;
+}
+
+.root {
+    max-width: 1300px;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.link {
+    text-decoration: none;
+    color: #333;
+    transition: all .1s ease;
+}
+
+.link:hover {
+    color: #0085E5;
+}
+
+.link:active {
+    color: navy;
+}
+
+.button {
+    display: block;
+    box-sizing: border-box;
+    
+    height: 48px;
+    padding: 7px 20px;
+    border-radius: 2px;
+    background: #1C2932;
+    border: none;
+    
+    text-align: center;
+    color: #FFFCFC;
+    font: 18px/34px 'PT Sans';
+    letter-spacing: .06em;
+    transition: all .2s ease;
+    
+    cursor: pointer;
+}
+
+.button:hover {
+    box-shadow: var(--full-shadow);
+    color: #FFFCFC;
+}
+
+.button:active {
+    box-shadow: var(--halfway-shadow);
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button_disabled {
+    background: #1c293233 !important;
+    cursor: default;
+}
+
+.button_disabled:hover {
+    box-shadow: none;
+}
+
+.title {
+    font-family: 'PT Serif', serif;
+}
+
+.header {
+    height: 48px;
+    z-index: 2;
+    border-bottom: 1px solid #BBB;
+}
+
+.header__item {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 86px;
+}
+
+.header__left {
+    display: flex;
+    align-items: center;
+    max-width: 714px;
+    width: 55%;
+    
+    justify-content: space-between;
+    vertical-align: top;
+}
+
+.header__right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shirt-block {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(auto-fill, 320px);
+    grid-row-gap: 49px;
+}
+
+.shirt {
+    position: relative;
+    width: 320px;
+}
+
+.shirt__img, .shirt__price {
+    transition: all .2s ease;
+}
+
+.shirt:hover .shirt__img {
+    box-shadow: var(--halfway-shadow);
+}
+
+.shirt__title {
+    font-size: 2.5em;
+    line-height: 1.18em;
+    margin-bottom: -24px;
+}
+
+.shirt__img_cat {
+    position: relative;
+    z-index: -1;
+}
+
+.shirt__img {
+    position: relative;
+    z-index: -1;
+    width: 320px;
+    height: 320px;
+}
+
+.shirt__discount {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 80px;
+    height: 80px;
+    background: #E728A2;
+    
+    border-radius: 50%;
+    text-align: center;
+    color: #FFFCFC;
+    font: bold 24px/80px 'Roboto Condensed';
+}
+
+.shirt__price {
+    display: inline-block;
+    position: relative;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.currency {
+    font-weight: normal;
+    color: #807e7e;
+}
+
+.ol_price {
+    display: inline-block;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.125em;
+    margin-bottom: -7px;
+}
+
+.ol_price::after {
+    content: '';
+    display: block;
+    border-bottom: 1px solid black;
+    width: 56px;
+    margin-top: -12px;
+    transform: rotate(-11deg);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    height: 80px;
+    width: 100%;
+    background: #FFFCFC;
+    border-top: 1px solid #BBB;
+    overflow: hidden;
+}
+
+.footer__item {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 86px;
+    box-sizing: border-box;
+}
+
+.footer__left {
+    display: flex;
+    width: 612px;
+    left: 86px;
+    
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: top;
+}
+
+.footer__logo {
+    width: 60px;
+}
+
+.footer__right {
+    display: flex;
+    align-items: center;
+}
+

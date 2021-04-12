@@ -1,0 +1,84 @@
+<?
+    rkAssert([], $_param_);
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/projects/shirt/manage/css/generic.css" rel="stylesheet">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/stock.css">
+        <title>Главное в жизни — склад</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans:400,700|PT+Serif:400,700&display=swap" rel="stylesheet">
+        <script src="/projects/shirt/manage/js/save.js"></script>
+    </head>
+    <body>
+        <? include 'templates/header.phtml'; ?>
+        
+        <main class="root main">
+            <div class="tabs-list">
+                <? printTabs(); ?>
+            </div>
+            <div class="pages-list">
+                <? printPages(); ?>
+            </div>
+        </main>
+        <script type="module">
+            import Q from '/projects/for_short.js';
+            import State from '/projects/shirt/manage/js/State.js';
+            
+            
+            let globalState = new State();
+            
+            setupSaveButton(Q(".save-button"), "/projects/shirt/manage/sql/save-stock.php", () => globalState.serialize(), () => globalState.reset());
+            setupResetButton(Q(".reset-button"), Q(".saved-screening"), "/projects/shirt/manage/stock_content.php", reset);
+            
+            Q(".tab", true).on("click", function () {
+                Q(".tab_selected").classList.remove("tab_selected");
+                this.classList.add("tab_selected");
+                
+                Q(".page_selected").classList.remove("page_selected");
+                Q(".page[data-assoc='" + this.dataset.assoc + "']").classList.add("page_selected");
+            });
+            
+            Q(".quantity-input", true).on("change", function () {
+                let id = this.near(".id-input").value;
+                let custom = this.dataset.custom;
+                
+                if (!id) {
+                    this.near(".id-input").value = id = guidGenerator();
+                    custom = this.dataset.custom = true;
+                }
+                
+                globalState.add({
+                    type: custom ? State.CRUD.CREATE : State.CRUD.UPDATE,
+                    id: id,
+                    quantity: this.value,
+                    page_type: this.from(".page").dataset.key,
+                    size: this.from(".row").dataset.key,
+                    color: this.from(".cell").dataset.key
+                })
+            });
+            
+            async function reset (response) {
+                let result = null;
+                try {
+                    result = await response.clone().json();
+                } catch (err) {
+                    console.log(await response.text());
+                    throw err;
+                }
+                
+                let contents = Q(".page", true).map(page => page.to(".row", true).map(row => row.to(".cell", true).map(cell => cell.to(".quantity-input"))));
+                
+                for (let i = 0; i < result.length; i++)
+                    for (let j = 0; j < result[i].length; j++)
+                        for (let u = 0; u < result[i][j].length; u++) {
+                            contents[i][j][u + 1].value = result[i][j][u];
+                            if (result[i][j][u] != 0) console.log(contents[i][j][u + 1]);
+                        }
+            }
+        
+        </script>
+    </body>
+</html>

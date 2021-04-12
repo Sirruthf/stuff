@@ -1,0 +1,8 @@
+<?
+    $_arglist = ["is_active", "size_num", "size_name"];
+?>
+
+<label class="size-list__item size-button control-button">
+    <input class="size-list__select" type="radio" name="sizes" value="<?=$_param_["size_id"]?>" <?=$_param_["is_active"] ? "checked" : ""?> hidden>
+    <div class="size-list__button"><?=$_param_["size_num"]?> <span class="size-list__button__letters"><?=$_param_["size_name"]?></span></div>
+</label>

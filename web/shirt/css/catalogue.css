@@ -1,0 +1,161 @@
+html {
+    height: 0;
+    min-height: 100%;
+}
+
+body {
+    height: 0;
+    min-height: 100%;
+}
+
+.main {
+    min-height: 100%;
+    margin-top: 72px;
+    padding-bottom: 72px;
+}
+
+.root {
+    max-width: 1440px;
+}
+
+.header__item {
+    max-width: 1300px;
+}
+
+.top_block {
+    display: flex;
+    padding-right: 100px;
+}
+
+.top_block__title {
+    margin: 0;
+    font: bold 40px 'PT Serif';
+}
+
+.top_block__logo {
+    width: 252px;
+    padding-left: 56px;
+    box-sizing: border-box;
+}
+
+.top_block__heading {
+    flex-grow: 1;
+}
+
+.top_block__counter {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 12px;
+    font-size: 0.9em;
+}
+
+.breadcrumbs {
+    margin: 10px 0px 2px;
+}
+
+.breadcrumbs__second_visible {
+    display: initial;
+}
+
+.left-menu {
+    position: fixed;
+    width: 190px;
+    top: 180px;
+    padding-left: 20px;
+    max-height: calc(100% - 180px);
+    box-sizing: border-box;
+    overflow-y: scroll;
+    font-family: 'PT Sans', sans-serif;
+    background: #FFFCFC;
+}
+
+.left-menu::-webkit-scrollbar {
+    width: 5px;
+}
+
+.left-menu::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #EEE;
+}
+
+.left-menu__subtitle {
+    font-weight: bold;
+    font-family: 'PT Serif', sans-serif;
+    font-size: 1.13em;
+}
+
+.left-menu__list {
+    margin: 0;
+    padding-inline-start: 0;
+    list-style-type: none;
+}
+
+.left-menu__group {
+    margin-block-start: 16px;
+    margin-block-end: 27px;
+    padding-inline-start: 0;
+    list-style-type: none;
+    line-height: 2em;
+}
+
+.left-menu__item {
+    padding-left: 20px;
+    transition: all .1s ease;
+}
+
+.left-menu__item__link {
+    display: block;
+    width: 100%;
+}
+
+.left-menu__item__link:active {
+    color: #0085E5;
+}
+
+.left-menu__item:hover {
+    border-radius: 30px;
+    background: rgba(28, 41, 50, 0.1);
+}
+
+.left-menu__item:active {
+    border-radius: 30px;
+    background: rgba(28, 41, 50, 0.2);
+}
+
+.left-menu__item.selected {
+    border-radius: 30px;
+    background: #333;
+}
+
+.left-menu__item.selected .link {
+    color: #EEE;
+    cursor: default;
+}
+
+.shirt-block {
+    padding: 40px 40px 0 0;
+    margin-left: 190px;
+}
+
+.shirt {
+    transition: all .15s ease;
+}
+
+.fade {
+    margin-top: 12px;
+    margin-bottom: -12px;
+    opacity: 0;
+}
+
+.unfade {
+    margin-top: -12px;
+    opacity: 0;
+}
+
+.ol_price {
+    margin-left: 8px;
+}
+
+.footer {
+    bottom: auto;
+}

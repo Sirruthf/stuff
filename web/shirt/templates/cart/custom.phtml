@@ -1,0 +1,40 @@
+<?
+    rkAssert(["product_img", "img_left", "img_top", "img_width", "type_id", "size_id", "color_id", "product_color", "product_size", "product_quantity", "price"], $_param_);
+?>
+
+<li class="card card_custom">
+    <div class="card__image-block">
+        <img class="card__img" src="/projects/shirt/img/etc/bg.png">
+        <img class="card__img_custom" src="/projects/shirt/img/upload/client/<?=$_param_["product_img"]?>" style="
+            left: <?=$_param_["img_left"]?>px;
+            top: <?=$_param_["img_top"]?>px;
+            width: <?=$_param_["img_width"]?>px;
+        ">
+        <div class="link delete-button">Удалить</div>
+    </div>
+    <div class="card__desc">
+        <input type="hidden" class="card-id" value="<?=$_param_["product_img"]?>">
+        <input type="hidden" class="card-type-id" value="<?=$_param_["type_id"]?>">
+        <input type="hidden" class="card-size-id" value="<?=$_param_["size_id"]?>">
+        <input type="hidden" class="card-color-id" value="<?=$_param_["color_id"]?>">
+        <input type="hidden" class="card-left-input" value="<?=$_param_["img_left"]?>">
+        <input type="hidden" class="card-top-input" value="<?=$_param_["img_top"]?>">
+        <input type="hidden" class="card-width-input" value="<?=$_param_["img_width"]?>">
+        <input type="hidden" class="card-height-input" value="<?=$_param_["img_height"]?>">
+        <input type="hidden" class="card-price" value="<?=$_param_["price"]?>">
+        <div class="card__head-row">
+            <h1 class="card__title"><?=$_param_["product_title"]?></h1>
+            <span class="card__price"><?=$_param_["product_price"]?></span>
+        </div>
+        <div class="card__row">Цвет: <?=$_param_["product_color"]?></div>
+        <div class="card__row">Размер: <?=$_param_["product_size"]?></div>
+        <div class="card__row">
+            Количество
+            <div class="quantity-unit">
+                <input type="button" class="quantity-unit__button quantity-unit__minus-button" value="−"
+                ><input type="number" min="1" class="quantity-unit__input card-quantity" value="<?=$_param_["product_quantity"]?>"
+                ><input type="button" class="quantity-unit__button quantity-unit__plus-button" value="+">
+            </div>
+        </div>
+    </div>
+</li>

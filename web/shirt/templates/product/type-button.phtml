@@ -1,0 +1,10 @@
+<?
+    rkAssert(["type_id", "is_active", "type-icon"], $_param_);
+?>
+
+<label class="type-list__item type-button control-button">
+    <input class="type-list__select" type="radio" name="types" value="<?=$_param_["type_id"]?>" <?= $_param_["is_active"] ? "checked" : "" ?> hidden>
+    <div class="type-list__button">
+        <? require "{$_param_["type-icon"]}" ?>
+    </div>
+</label>

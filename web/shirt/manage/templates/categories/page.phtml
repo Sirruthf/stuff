@@ -1,0 +1,8 @@
+<?
+    rkAssert(["cat_name", "assoc", "url", "selected"], $_param_)
+?>
+
+<div class="sub-cat-block__page cat-group-root <?= $_param_["selected"] ? "sub-cat-block__page_visible" : "" ?>" data-assoc="<?=$_param_["assoc"]?>" data-url="<?=$_param_["url"]?>/">
+    <h1 class="cat-title"><?=$_param_["cat_name"]?></h1>
+    <? printRows($_param_["assoc"]); ?>
+</div>

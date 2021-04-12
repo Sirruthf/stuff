@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/projects/shirt/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/css/shipment.css">
+        <title>Главное в Жизни</title>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:700|Roboto+Condensed:700&display=swap" rel="stylesheet">
+    </head>
+        <? require 'templates/header.phtml' ?>
+        <main class="root main">
+            <h1 class="title main__title">Доставка</h1>
+            <section class="section">
+                <h2 class="section__title">Самовывоз</h2>
+                <ul class="section__text iconed-list">
+                    <li class="iconed-list__item iconed-list__time">ежедневно с 11:00 до 21:00</li>
+                    <li class="iconed-list__item iconed-list__addr">ул. Новокузнецкая, д.1, стр. 1, офис 19.</li>
+                    <li class="iconed-list__item iconed-list__fee">бесплатно</li>
+                </ul>
+            </section>
+            <section class="section section_inlined">
+                <h2 class="section__title">Доставка по Москве</h2>
+                <ul class="section__text iconed-list">
+                    <li class="iconed-list__item iconed-list__time">с понедельника по пятницу с 11:00 до 21:00</li>
+                    <li class="iconed-list__item iconed-list__fee">400 Р в пределах МКАД, до 8 толстовок и 20 футболок<br>500 Р в пределах МКАД, до 15 толстовок и 40 футболок</li>
+                </ul>
+            </section>
+            <section class="section section_inlined">
+                <h2 class="section__title">Доставка по Московской области</h2>
+                <ul class="section__text iconed-list">
+                    <li class="iconed-list__item iconed-list__time">с понедельника по пятницу с 11:00 до 21:00</li>
+                    <li class="iconed-list__item iconed-list__addr">10-15км. за МКАД, до 8 изделий</li>
+                    <li class="iconed-list__item iconed-list__fee">от 500 руб. в зависимости от удаленности</li>
+                </ul>
+            </section>
+        </main>
+        <? require 'templates/footer.phtml'; ?>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: inherit;
+}
+
+.header__phone {
+    margin-right: 52px;
+    font: bold 1.125em 'PT Sans';
+}
+
+.cart-link {
+    letter-spacing: 0.08em;
+    font: bold 1em 'PT Sans';
+}
+
+.cart-link__svg {
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.breadcrumbs {
+    margin-top: 72px;
+    font-size: 14px;
+}

@@ -1,0 +1,36 @@
+.order-block {
+    display: flex;
+    align-items: flex-start;
+}
+
+.main {
+    padding: 72px 24px;
+}
+
+.rows-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.cell {
+    padding: 16px;
+}
+
+.dropdown-cell {
+    position: relative;
+}
+
+.status-dropdown {
+    position: absolute;
+    top: 58px;
+    left: 24px;
+}
+
+.rows-list {
+    padding-top: 10px;
+}

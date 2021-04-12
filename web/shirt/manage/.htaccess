@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteBase /projects/shirt/manage
+
+RewriteRule ^catalogue/$ catalogue/all/ [R,L]
+RewriteRule ^catalogue/all/(.+)/$ catalogue/$1/ [R,L]
+RewriteRule ^catalogue/(.+)/$ catalogue.php?$1 [L]
+RewriteRule ^types/$ types.php [L]
+RewriteRule ^stock/$ stock.php [L]
+RewriteRule ^categories/$ categories.php [L]
+RewriteRule ^orders/$ orders.php [L]

@@ -1,0 +1,150 @@
+<? rkAssert(["current_url"], $_param_); ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/projects/shirt/manage/css/generic.css">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/minor.css">
+        <link rel="stylesheet" href="/projects/shirt/manage/css/catalogue.css">
+        <title>Главное в Жизни — Каталог</title>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:700&display=swap" rel="stylesheet">
+        <script src="/projects/shirt/manage/js/save.js"></script>
+        <script src="/projects/shirt/manage/js/ui_shared.js"></script>
+    </head>
+    
+    <body>
+        <input class="current_url" value="<?=$_param_["current_url"]?>" hidden>
+        <? require 'templates/header.phtml' ?>
+        <main class="root main">
+            <div class="left-menu tmpl$thumbed">
+                <ul class="left-menu__list">
+                    <? printGroups() ?>
+                </ul>
+            </div>
+            <div class="top-block">
+                <input type="button" class="button site-button add-button" value="+ Майка">
+                <div class="controls-list">
+                    <label class="tmpl$check-box control-all">
+                        <input type="checkbox" class="tmpl$check-box__true-box control-all__input" hidden>
+                        <div class="tmpl$check-box__imprint control-all__check"></div>Все
+                    </label>
+                    <div class="button control-del-button">Удалить</div>
+                    <div class="control-cat-group">
+                        Перенести <? printDropdown() ?>
+                    </div>
+                </div>
+                <div class="top_block__counter"></div>
+            </div>
+            <section class="shirt-block">
+                <? printItems() ?>
+            </section>
+            <template class="shirt-row-template">
+                <?
+                    requireTemplate("catalogue/row", [
+                        'tid' => 0,
+                        'cat_id' => 0,
+                        'preview' => 'default.png',
+                        'shirt_name' => "Новая кокаято непонятная",
+                        'shirt_price' => 1300,
+                        'shirt_discount' => 0,
+                        'shirt_comment' => "100% хлопок",
+                        'foto-list' => ""
+                        ], "manage/templates/"
+                    )
+                ?>
+            </template>
+            <template class="image-block-template">
+                <?
+                    requireTemplate("catalogue/row-image", [
+                            "is_preview" => false,
+                            "name" => "?/?",
+                            "tid" => "00000"
+                        ], "manage/templates/"
+                    )
+                ?>
+                
+                <div class="foto-cont">
+                    <input class="name-input" hidden>
+                    <img class="shirt__foto">
+                    <div class="foto-buttons-list">
+                        <svg class="foto-cont__button image-mark-button" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 3H7C5.9 3 5.01 3.9 5.01 5L5 21L12 18L19 21V5C19 3.9 18.1 3 17 3Z"/>
+                        </svg>
+                        <svg class="foto-cont__button image-del-button" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.4 0 0 5.4 0 12C0 18.6 5.4 24 12 24C18.6 24 24 18.6 24 12C24 5.4 18.6 0 12 0ZM18 16.32L16.32 18L12 13.68L7.68 18L6 16.32L10.32 12L6 7.68L7.68 6L12 10.32L16.32 6L18 7.68L13.68 12L18 16.32Z" fill="#7D7B7B"/>
+                        </svg>
+                    </div>
+                </div>
+            </template>
+        </main>
+        
+        <script type="module">
+            import Q from '/projects/for_short.js';
+            import CataloguePageManager from '/projects/shirt/manage/js/CataloguePageManager.js';
+            
+            
+            let pageManager = new CataloguePageManager({
+                checkbox: Q(".control-all__input"),
+                url: Q(".current_url").value,
+                rows: Q(".shirt", true),
+            });
+            
+            
+            /////////////////////////////// checkbox ////////////////////////////////////
+            
+            // Q(".control-all__input").on("change", function () {
+            //     Q(".shirt-checkbox", true).forEach(item => {
+            //         item.checked = this.checked;
+            //         item.from(".shirt").class("shirt_selected", this.checked);
+            //     });
+            // });
+            
+            // Q(".shirt-checkbox", true).on("change", () => updateCheckbox(controlCheckbox));
+            
+            
+            /////////////////////////////// delete button ////////////////////////////////
+            
+            // Q(".control-del-button").on("click", function () {
+            //     let rows = globalState.current.filter(shirt => shirt.checked);
+            //
+            //     rows.forEach(row => row.remove());
+            //
+            //     controlCheckbox.setUnchecked();
+            //
+            //     console.log(globalState);
+            // });
+            
+            
+            //////////////////////////////// dropdown //////////////////////////////////////
+            
+            let changeMenu = new DropdownMenu ({
+                select: Q(".control-cat-select"),
+                dropdown: Q(".control-cat-dropdown"),
+                callback (value) {
+                    Q(".shirt_selected", true).forEach(shirt => {
+                        shirt.to(".cat-id-input").value = value;
+                        shirt.to(".cat-id-input").dispatchEvent(new Event("change"));
+                    });
+                }
+            });
+            
+            
+            ///////////////////////////////// header ///////////////////////////////////////
+            
+            Q(".reset-button").on("click", () => {
+                updatePage({
+                    shirt_block: Q(".shirt-block"),
+                    remote: "/projects/shirt/manage/lib/fetch_category.php",
+                    url: globalState.currentURL,
+                    prefix: "manage/",
+                    update: updateCategory(Q(".left-menu__item"), null, pageManager.state)
+                });
+            });
+            
+            
+            setupSaveButton(Q(".save-button"), "/projects/shirt/manage/sql/save-catalogue.php", () => pageManager.state.serialize(), () => pageManager.state.reset());
+            // setupSPA(Q(".left-menu__item__link", true), {shirt_block: Q(".shirt-block"), remote: "/projects/shirt/manage/lib/fetch_category.php", update: null });
+            
+        </script>
+    </body>
+</html>

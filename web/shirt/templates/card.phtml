@@ -1,0 +1,15 @@
+<?
+    rkAssert(["url_prefix", "id", "src", "discount", "has_discount", "price", "ol_price"], $_param_);
+?>
+
+<div class="shirt">
+    <a class="link" href="/<?=$_param_["url_prefix"] ?>product/<?=$_param_["id"]?>/">
+        <div>
+            <img class="shirt__img" src="/projects/shirt/img/product/<?=$_param_["id"]?>/<?=$_param_["src"]?>">
+            <? $_param_["has_disount"] ? "<div class=\"shirt__discount\">-{$_param_["discount"]}%</div>" : "" ?>
+            <div class="shirt__price"><?=$_param_["price"]?>
+            <span class="currency">₽</span></div>
+            <? $_param_["has_disount"] ? "<div class=\"ol_price\">{$_param_["ol_price"]} Р</div>" : "" ?>
+        </div>
+    </a>
+</div>
