@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{%  block css %}
+<link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{%  block content %}
+<div id="jb">
+    <div id="jb1">
+        <div>
+            <h1 class="title"> CoNetwork</h1>
+            <p class="text">Сделано программистами для программистов.<br>Шутка:( </p>
+        </div>
+    </div>
+
+    <div id="jb2">
+        <div>
+            <p style="color: white">CoNetwork - полноценная платформа для всех, чья работа так или иначе связана с
+                IT-сферой. Здесь вы сможете найти программистов в свою команду и проверить их знания, используя нашу
+                технологию синхронного кода при собеседовании, которая точно выявит уровень навыков.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col menu">
+            <a style=" text-decoration: none;color: black" href="{% url 'authentication:register' %}">
+                <h3>Зарегестрируйтесь</h3>
+                <hr>
+                <p>Создайте аккаунт, ответив на несколько простых вопросов. </p>
+            </a>
+        </div>
+        <div class="col menu">
+            <a style=" text-decoration: none;color: black" href="{% url 'session:create_session' %}">
+                <h3>Создайте сессию</h3>
+                <hr>
+                <p>Выберите язык и укажите параметры, подготовив все за пару минут </p>
+            </a>
+        </div>
+        <div style="color: black" class="col menu">
+            <h3>Разошлите ссылку</h3>
+            <hr>
+            <p>Приглашение будет только у тех, кому Вы сами его отправите</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="news">
+    <h1 class="subtitle">СВЕЖИЕ НОВОСТИ</h1>
+    <hr class="subtitle">
+    {% for news in news %}
+    <div class="form" class="news">
+        <a href="{% url 'news:news' pk=news.pk %}">
+            <h2 class="text_head">
+                {{ news.title }}
+            </h2>
+            <h3 class="news-subtitle">
+                {{ news.subtitle }}
+            </h3>
+        </a>
+        <p class="">Posted by mshp32group
+            on {{ news.date }}</p>
+    </div>
+    <hr>
+    {% endfor %}
+
+    <div class="pagination">
+
+        {% if news.has_previous %}
+        <a class="right" href="?page={{ news.previous_page_number }}">
+            <button type="button" class="btn">More fresh posts &larr;</button>
+        </a>
+        {% endif %}
+    </div>
+    <div class="pagination">
+        {% if news.has_next %}
+        <a class="left" href="?page={{ news.next_page_number }}">
+            <button type="button" class="btn">&rarr; Older posts</button>
+        </a>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+{%  block js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

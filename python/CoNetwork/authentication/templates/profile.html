@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!--here goes profile-->
+
+<div class="form">
+    {% if request.user == profile.user %}
+        <form method="POST">
+            <h1 class="text_ head">Profile page</h1>
+            <div style="margin-top:20px" class="row">
+                <div class="col">
+                    <img src="{% static 'img/ava_plchldr.png' %}" width="400px" height="400px">
+                    <button style="margin-top:30px" class="btn">change your avatar</button>
+                </div>
+                <div class="col">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <div class="form-control bg-secondary">{{ profile.user.username }}</div>
+                        <hr>
+                        <input class="form-control" name="email" placeholder="E-mail" value="{{ profile.user.email }}">
+                        {% if form.errors and request.method == 'POST'%}
+                        <div class="alert alert-danger" role="alert">{{ form.errors }}</div>
+                        {% elif request.method == 'POST' %}
+                        <div class="alert alert-success" role="alert">All changes saved!</div>
+                        {% endif %}
+                        <button type="submit" class="btn">Save</button>
+                        <a class="btn" href="{% url 'main:index' %}">Cancel</a>
+                    </fieldset>
+                    <a class="btn" href="{% url 'authentication:change_password' %}">Change password</a>
+                </div>
+            </div>
+        </form>
+    {% else %}
+        <h1 class="text_ head">Profile page</h1>
+        <div style="margin-top:20px" class="row">
+            <div class="col">
+                <img src="{% static 'img/ava_plchldr.png' %}" width="400px" height="400px">
+            </div>
+            <div class="col">
+                <fieldset class="form-group">
+                    <div class="form-control bg-secondary">{{ profile.user.username }}</div>
+                    <hr>
+                    <div class="form-control bg-secondary">{{ profile.user.email }}</div>
+                </fieldset>
+            </div>
+        </div>
+    {% endif %}
+</div>
+</div>
+<!--here profile ends-->
+{% endblock %}
